@@ -26,7 +26,7 @@ def main():
     player=Entity(25, 25, '@', tcod.yellow, 'Ratiel Snailface the Enchanter', 5, 1, 0, RenderOrder.ACTOR, False, None, None, None, Inventory(26))
     entities=[player]
     display=tcod.console.Console(terminal_width, terminal_height, 'C')  # C not for Celsius
-    interface=tcod.console.Console(terminal_width, map_height, 'C')
+    # interface  equals  tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     # Then generate map
     fov_recompute=True
