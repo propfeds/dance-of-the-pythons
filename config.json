@@ -1,0 +1,11 @@
+{
+    "terminal_width": 80,
+    "terminal_height": 60,
+    "map_width": 80,
+    "map_height": 50,
+    "max_monsters_per_room": 3,
+    "max_items_per_room": 3,
+    "fov_algorithm": 0,
+    "fov_light_walls": 1,
+    "fov_radius": 7
+}
