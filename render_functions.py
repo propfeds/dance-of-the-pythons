@@ -2,7 +2,7 @@ import tcod
 from enum import Enum
 
 class RenderOrder(Enum):
-    TILE=0
-    CORPSE=1
-    ITEM=2
+    CORPSE=0
+    ITEM=1
+    ENVIRONMENT=2   # Bushes / tall grass, explosion smoke, particles
     ACTOR=3
