@@ -5,6 +5,8 @@ from map_objects.game_map import GameMap
 from components.inventory import Inventory
 from entity import Entity
 from render_functions import RenderOrder
+from game_states import GameStates
+from input_handler import handle
 
 def main():
     # Importing data from data/config.json
@@ -26,13 +28,30 @@ def main():
     display=tcod.console.Console(terminal_width, terminal_height, 'C')  # C not for Celsius
     interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
+    # Then generate map
+    fov_recompute=True
+    # Define fov map & message log
+    game_state=GameStates.PLAYER_TURN
+    prev_game_state=game_state
+    targeting_item=None
     # Game loop
     while True:
         for event in tcod.event.wait():
             if event.type=='QUIT':
                 raise SystemExit()
             elif event.type=='KEYDOWN':
-                print(event)
+                if fov_recompute:
+                    print('Please remember to recompute fov.')
+                # Render All
+                fov_recompute=False
+                tcod.console_flush()
+                # Clear All?
+                action=handle(event, game_state)
+                move=action.get('move')
+                pickup=action.get('pickup')
+                take_inventory=action.get('take_inventory')
+                cancel=action.get('cancel')
+                
 
 if __name__=='__main__':
     main()
