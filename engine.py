@@ -1,4 +1,5 @@
 import tcod
+import tcod.event
 import json
 
 def main():
@@ -17,7 +18,7 @@ def main():
 
     # Init console
     tcod.console_set_custom_font('consolas_unicode_10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
-    tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', fullscreen=False)
+    tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'F', False)
     
 
 if __name__=='__main__':
