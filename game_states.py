@@ -1,7 +1,7 @@
 from enum import Enum
 
 class GameStates(Enum):
-    DEATH=0
+    DEATH=0         # Faction Departed
     PLAYER_TURN=1   # Faction Good
     ALLY_TURN=2     # Faction Good (your fellow snekmen and charmed sneks)
     ENEMY_TURN=3    # Faction Bad (humans)
