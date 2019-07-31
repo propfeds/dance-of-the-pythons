@@ -3,7 +3,7 @@ import tcod.event
 import json
 
 def main():
-    # Importing data from config.json
+    # Importing data from data/config.json
     with open('data/config.json') as cfg:
         data=json.load(cfg)
     terminal_width=data['terminal_width']
@@ -19,6 +19,9 @@ def main():
     # Init console
     tcod.console_set_custom_font('data/consolas_unicode_10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
     tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'F', False)
+    
+
+    # Game loop
     while True:
         for event in tcod.event.wait():
             if event.type=='QUIT':
