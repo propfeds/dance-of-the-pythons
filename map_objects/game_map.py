@@ -8,5 +8,5 @@ class GameMap:
             self.tiles=self.init_tiles()
     def init_tiles(self):
         # It should be iterating C order?
-        tiles=[[Tile('#', tcod.grey, 'Grey brick wall', False, False) for x in range(self.width)] for y in range(self.height)]
+        tiles=[[Tile('.', tcod.white, 'White grass', True, True) for x in range(self.width)] for y in range(self.height)]
         return tiles
