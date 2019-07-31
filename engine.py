@@ -6,7 +6,7 @@ from components.inventory import Inventory
 from entity import Entity
 from render_functions import RenderOrder
 from game_states import GameStates
-from input_handler import handle
+from input_handler import handle_key
 
 def main():
     # Importing data from data/config.json
@@ -46,7 +46,7 @@ def main():
                 fov_recompute=False
                 tcod.console_flush()
                 # Clear All?
-                action=handle(event, game_state)
+                action=handle_key(event, game_state)
                 move=action.get('move')
                 pickup=action.get('pickup')
                 take_inventory=action.get('take_inventory')
