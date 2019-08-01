@@ -11,4 +11,4 @@ class GameMap:
         self.path_map=tcod.map.Map(width, height, 'C')
         self.path_map.walkable[:]=True
         self.path_map.transparent[:]=True
-        self.graphics_map=[[Tile('.', tcod.light_green, 'Grass') for x in range(self.width)] for y in range(self.height)]
+        self.graphics_map=[[Tile('.', tcod.light_green, tcod.dark_green, 'Grass') for x in range(self.width)] for y in range(self.height)]
