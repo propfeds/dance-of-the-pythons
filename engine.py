@@ -20,10 +20,9 @@ def main():
     fov_light_walls=bool(data['fov_light_walls'])
     fov_radius=data['fov_radius']
 
-    # Init console, player and stuff
+    # Init root console and player
     player=Entity(25, 25, '@', tcod.yellow, 'Ratiel Snailface the Enchanter', 5, 1, 0, RenderOrder.ACTOR, False, None, None, None, Inventory(26))
     entities=[player]
-
     tcod.console_set_custom_font('data/arial10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
     root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
     display=tcod.console.Console(terminal_width, terminal_height, 'C') 
