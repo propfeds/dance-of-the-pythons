@@ -31,3 +31,7 @@ class Entity:
         # Whether the item has an inventory
         if self.inventory:
             self.inventory.owner=self
+
+    def move(self, dx, dy):
+        self.x+=dx
+        self.y+=dy

@@ -13,22 +13,24 @@ def handle_key(event, game_state):
 
 def handle_player_key(event):
     # Movement
-    if event.scancode==tcod.KEY_KP8 or event.sym=='k':
+    if event.scancode==96 or event.sym=='k':
         return {'move': (0, -1)}
-    elif event.scancode==tcod.KEY_KP2 or event.sym=='j':
+    elif event.scancode==90 or event.sym=='j':
         return {'move': (0, 1)}
-    elif event.scancode==tcod.KEY_KP4 or event.sym=='h':
+    elif event.scancode==92 or event.sym=='h':
         return {'move': (-1, 0)}
-    elif event.scancode==tcod.KEY_KP6 or event.sym=='l':
+    elif event.scancode==94 or event.sym=='l':
         return {'move': (1, 0)}
-    elif event.scancode==tcod.KEY_KP7 or event.sym=='y':
+    elif event.scancode==95 or event.sym=='y':
         return {'move': (-1, -1)}
-    elif event.scancode==tcod.KEY_KP9 or event.sym=='u':
+    elif event.scancode==97 or event.sym=='u':
         return {'move': (1, -1)}
-    elif event.scancode==tcod.KEY_KP1 or event.sym=='b':
+    elif event.scancode==89 or event.sym=='b':
         return {'move': (-1, 1)}
-    elif event.scancode==tcod.KEY_KP3 or event.sym=='n':
+    elif event.scancode==91 or event.sym=='n':
         return {'move': (1, 1)}
+    elif event.scancode==93 or event.sym=='s':
+        return {'move': (0, 0)}
     # Crab Grab
     if event.sym=='g':
         return {'pickup': True}
