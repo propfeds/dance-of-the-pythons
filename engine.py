@@ -36,6 +36,11 @@ def main():
     game_state=GameStates.PLAYER_TURN
     prev_game_state=game_state
     targeting_item=None
+    # Rendering for the first time
+    game_map.recompute_fov(player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
+    render_all(root_console, display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
+    fov_recompute=False
+    tcod.console_flush()
     # Game loop
     while True:
         for event in tcod.event.wait():
