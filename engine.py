@@ -54,7 +54,6 @@ def main():
                 clear_all(display, entities)
                 # Processing action
                 action=handle_key(event, game_state)
-                print(action)
                 move=action.get('move')
                 pickup=action.get('pickup')
                 take_inventory=action.get('take_inventory')
@@ -107,7 +106,9 @@ def main():
                         game_state=GameStates.NEUTRAL_TURN
                 
                 if game_state==GameStates.NEUTRAL_TURN:
-                        game_state=GameStates.ALLY_TURN
+                        game_state=GameStates.PLAYER_TURN
+                
+                break
 
 
 if __name__=='__main__':
