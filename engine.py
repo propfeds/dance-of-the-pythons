@@ -87,9 +87,9 @@ def main():
                     game_state=GameStates.INVENTORY
                 
                 if exit:
-                    if game_state>=10:  # Game states >= 10 are menus: inventory, targeting, etc.
+                    if game_state.value>=10:  # Game states >= 10 are menus: inventory, quipment, etc.
                         game_state=prev_game_state
-                    if game_state>=20:  # Game states >= 20 are targetings
+                    if game_state.value>=20:  # Game states >= 20 are targetings
                         player_turn_results.append({'targeting_cancelled': True})
                     # else brings up main menu
                 
