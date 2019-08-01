@@ -25,8 +25,7 @@ def main():
     entities=[player]
 
     tcod.console_set_custom_font('data/arial10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
-    # Testing None renderer instead of tcod.RENDERER_SDL2
-    root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, None, 'C', False)
+    root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
     display=tcod.console.Console(terminal_width, terminal_height, 'C') 
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
