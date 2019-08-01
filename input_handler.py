@@ -1,5 +1,14 @@
 import tcod
+import tcod.event
 from game_states import GameStates
+
+def handle_event(game_state):
+    for event in tcod.event.get():
+        if event.type=='QUIT':
+            raise SystemExit()
+        elif event.type=='KEYDOWN':
+            return handle_key(event, game_state)
+    return {}
 
 def handle_key(event, game_state):
     if event.scancode==tcod.KEY_ENTER and event.mod==tcod.event.KMOD_ALT:
