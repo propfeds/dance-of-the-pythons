@@ -30,7 +30,7 @@ def main():
     game_map=GameMap(map_width, map_height)
     # Then generate map
     fov_recompute=True
-    # Define fov map & message log
+    # message log
     game_state=GameStates.PLAYER_TURN
     prev_game_state=game_state
     targeting_item=None
