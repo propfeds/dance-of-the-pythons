@@ -12,3 +12,6 @@ class GameMap:
         self.path_map.walkable[:]=True
         self.path_map.transparent[:]=True
         self.graphics_map=[[Tile('.', tcod.light_green, tcod.dark_green, 'Grass') for x in range(self.width)] for y in range(self.height)]
+
+    def recompute_fov(self, x, y, radius, light_walls, algorithm):
+        self.path_map.compute_fov(x, y, radius, light_walls, algorithm)

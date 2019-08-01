@@ -4,7 +4,7 @@ import json
 from map_objects.game_map import GameMap
 from components.inventory import Inventory
 from entity import Entity
-from render_functions import RenderOrder
+from render_functions import RenderOrder, render_all
 from game_states import GameStates
 from input_handler import handle_key
 
@@ -26,7 +26,7 @@ def main():
     player=Entity(25, 25, '@', tcod.yellow, 'Ratiel Snailface the Enchanter', 5, 1, 0, RenderOrder.ACTOR, False, None, None, None, Inventory(26))
     entities=[player]
     display=tcod.console.Console(terminal_width, terminal_height, 'C')  # C not for Celsius
-    # interface  equals  tcod.console.Console(terminal_width, map_height, 'C')
+    interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     # Then generate map
     fov_recompute=True
@@ -41,8 +41,8 @@ def main():
                 raise SystemExit()
             elif event.type=='KEYDOWN':
                 if fov_recompute:
-                    print('Please remember to recompute fov.')
-                # Render All
+                    game_map.recompute_fov(player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
+                render_all(display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
                 fov_recompute=False
                 tcod.console_flush()
                 # Clear All?
