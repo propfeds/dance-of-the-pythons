@@ -21,12 +21,14 @@ def main():
     fov_radius=data['fov_radius']
 
     # Init console, player and stuff
-    tcod.console_set_custom_font('data/consolas_unicode_10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
-    tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
     player=Entity(25, 25, '@', tcod.yellow, 'Ratiel Snailface the Enchanter', 5, 1, 0, RenderOrder.ACTOR, False, None, None, None, Inventory(26))
     entities=[player]
-    display=tcod.console.Console(terminal_width, terminal_height, 'C')  # C not for Celsius
-    interface=tcod.console.Console(terminal_width, map_height, 'C')
+
+    tcod.console_set_custom_font('data/consolas_unicode_10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
+    # Testing None renderer instead of tcod.RENDERER_SDL2
+    root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, None, 'C', False)
+    display=tcod.console.Console(terminal_width, terminal_height, 'C') 
+    #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     # Then generate map
     fov_recompute=True
@@ -42,7 +44,7 @@ def main():
             elif event.type=='KEYDOWN':
                 if fov_recompute:
                     game_map.recompute_fov(player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
-                render_all(display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
+                render_all(root_console, display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
                 fov_recompute=False
                 tcod.console_flush()
                 # Clear All?
