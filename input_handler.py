@@ -4,6 +4,9 @@ from game_states import GameStates
 def handle_key(event, game_state):
     if event.scancode==tcod.KEY_ENTER and event.mod==tcod.event.KMOD_ALT:
         return {'fullscreen': True}
+    # Global exit: Cancels targeting, exits menus and pulls up menu while playing
+    if event.scancode==tcod.KEY_ESCAPE:
+        return {'exit': True}
     if game_state==GameStates.PLAYER_TURN:
         return handle_player_key(event)
     return {}

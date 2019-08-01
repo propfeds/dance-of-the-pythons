@@ -55,7 +55,7 @@ def main():
                 move=action.get('move')
                 pickup=action.get('pickup')
                 take_inventory=action.get('take_inventory')
-                cancel=action.get('cancel')
+                cancel=action.get('exit')
                 
 
 if __name__=='__main__':
