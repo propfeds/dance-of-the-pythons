@@ -4,7 +4,7 @@ import json
 from map_objects.game_map import GameMap
 from components.inventory import Inventory
 from entity import Entity
-from render_functions import RenderOrder, render_all, clear_all
+from renderer import RenderOrder, render_all, clear_all
 from game_states import GameStates
 from input_handler import handle_event
 from factions import Factions

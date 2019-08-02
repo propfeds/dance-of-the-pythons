@@ -1,5 +1,5 @@
 import tcod
-from render_functions import RenderOrder
+from renderer import RenderOrder
 
 class Entity:
     def __init__(self, x, y, name, faction, char, colour, hp, attack, shield, render_order=RenderOrder.CORPSE, pathable=True, inventory=None, item=None, ai=None, guard=None):

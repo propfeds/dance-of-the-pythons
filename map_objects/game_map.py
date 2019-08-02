@@ -1,6 +1,7 @@
 import tcod
 import tcod.map
 import numpy
+import map_objects.generator as generator
 from map_objects.tile import Tile
 
 class GameMap:
@@ -14,6 +15,8 @@ class GameMap:
         self.path_map.transparent[:]=True
         self.graphics_map=numpy.full((height, width), Tile('.', (106, 190, 48), (57, 60, 50)))
         self.explored=numpy.full((height, width), False)
+        origin_x=3
+        dest_x=generator.cave_y(origin_x, 0, 21, Tile('.', (138, 111, 48), (82, 75, 36)), 30, 30, 1, 2, self)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
