@@ -22,7 +22,6 @@ def main():
     fov_radius=data['fov_radius']
 
     # Init root console and player
-    # x, y, name, faction, char, colour, hp, attack, shield, render_order=RenderOrder.CORPSE, pathable=True, inventory=None, item=None, ai=None, guard=None
     player=Entity(0, 0, 'Ratiel Snailface the Enchanter', Factions.ALLY, '@', tcod.brass, 5, 1, 0, RenderOrder.ACTOR, False, Inventory(26), None, None, None)
     entities=[player]
     tcod.console_set_custom_font('gfx/fonts/edited_terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_ASCII_INROW)
