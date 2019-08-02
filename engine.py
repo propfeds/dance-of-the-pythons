@@ -7,6 +7,7 @@ from entity import Entity
 from render_functions import RenderOrder, render_all, clear_all
 from game_states import GameStates
 from input_handler import handle_event
+from factions import Factions
 
 def main():
     # Importing data from data/config.json
@@ -21,7 +22,8 @@ def main():
     fov_radius=data['fov_radius']
 
     # Init root console and player
-    player=Entity(0, 0, '@', tcod.yellow, 'Ratiel Snailface the Enchanter', 5, 1, 0, RenderOrder.ACTOR, False, None, None, None, Inventory(26))
+    # x, y, name, faction, char, colour, hp, attack, shield, render_order=RenderOrder.CORPSE, pathable=True, inventory=None, item=None, ai=None, guard=None
+    player=Entity(0, 0, 'Ratiel Snailface the Enchanter', Factions.ALLY, '@', tcod.brass, 5, 1, 0, RenderOrder.ACTOR, False, Inventory(26), None, None, None)
     entities=[player]
     tcod.console_set_custom_font('gfx/fonts/edited_terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_ASCII_INROW)
     root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)

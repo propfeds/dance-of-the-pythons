@@ -12,7 +12,7 @@ class GameMap:
         # Full of grass
         self.path_map.walkable[:]=True
         self.path_map.transparent[:]=True
-        self.graphics_map=numpy.full((height, width), Tile('.', (106, 190, 48), (75, 105, 47), 'Grass'))
+        self.graphics_map=numpy.full((height, width), Tile('.', (106, 190, 48), (57, 60, 50), 'Grass'))
         self.explored=numpy.full((height, width), False)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
