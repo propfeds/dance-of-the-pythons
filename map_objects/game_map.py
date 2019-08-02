@@ -13,10 +13,10 @@ class GameMap:
         # Full of grass
         self.path_map.walkable[:]=True
         self.path_map.transparent[:]=True
-        self.graphics_map=numpy.full((height, width), Tile('.', (106, 190, 48), (57, 60, 50)))
+        self.graphics_map=numpy.full((height, width), Tile('•', (106, 190, 48), (57, 60, 50)))
         self.explored=numpy.full((height, width), False)
         origin_x=3
-        dest_x=generator.cave_y(origin_x, 0, 21, Tile('.', (138, 111, 48), (82, 75, 36)), 30, 30, 1, 2, self)
+        dest_x=generator.cave_y(origin_x, 0, 21, Tile('•', (138, 111, 48), (82, 75, 36)), 60, 60, 1, 1, self)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
