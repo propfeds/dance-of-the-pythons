@@ -1,8 +1,8 @@
 {
-    "terminal_width": 64,
-    "terminal_height": 36,
-    "map_width": 54,
-    "map_height": 28,
+    "terminal_width": 48,
+    "terminal_height": 27,
+    "map_width": 48,
+    "map_height": 22,
     "fov_algorithm": 12,
     "fov_light_walls": 1,
     "fov_radius": 5
