@@ -12,22 +12,17 @@ def render_all(root_console, display, entities, player, game_map, fov_recompute,
     if fov_recompute:
         for y in range(game_map.height):
             for x in range(game_map.width):
-                visible=game_map.path_map.fov[y, x]
-                if visible:
-                    display.print(x, y, game_map.graphics_map[y][x].char, game_map.graphics_map[y][x].colour_lit, None, tcod.BKGND_NONE)
-                    # display.tiles[y, x]=(ord(game_map.graphics_map[y][x].char), (*game_map.graphics_map[y][x].colour_lit, 255), (*tcod.black, 255))
-                    game_map.graphics_map[y][x].explored=True
-                elif game_map.graphics_map[y][x].explored:
-                    display.print(x, y, game_map.graphics_map[y][x].char, game_map.graphics_map[y][x].colour_dim, None, tcod.BKGND_NONE)
-                    # display.tiles[y, x]=(ord(game_map.graphics_map[y][x].char), (*game_map.graphics_map[y][x].colour_dim, 255), (*tcod.black, 255))
-    render_ordered_entities=sorted(entities, key=lambda x:x.render_order.value)
+                if game_map.path_map.fov[y, x]:
+                    display.tiles[["ch", "fg"]][y, x]=ord(game_map.graphics_map[y, x].char), (*game_map.graphics_map[y, x].lit_colour, 255)
+                    game_map.explored[y, x]=True
+                elif game_map.explored[y, x]:
+                    display.tiles[["ch", "fg"]][y, x]=ord(game_map.graphics_map[y, x].char), (*game_map.graphics_map[y, x].dim_colour, 255)
+    render_ordered_entities=sorted(entities, key=lambda x: x.render_order.value)
     for entity in render_ordered_entities:
         if game_map.path_map.fov[entity.y, entity.x]:
-            display.print(entity.x, entity.y, entity.char, entity.colour, None, tcod.BKGND_NONE)
-    # 1st arg: console 0 == root
+            display.tiles[["ch", "fg"]][entity.y, entity.x]=ord(entity.char), (*entity.colour, 255)
     display.blit(root_console, 0, 0, 0, 0, terminal_width, terminal_height)
 
 def clear_all(display, entities):
     for entity in entities:
-        display.print(entity.x, entity.y, ' ', None, None, tcod.BKGND_NONE)
-        # display.tiles[entity.y, entity.x]=(ord(' '), (*tcod.black, 255), (*tcod.black, 255))
+        display.tiles[["ch"]][entity.y, entity.x]=ord(' ')

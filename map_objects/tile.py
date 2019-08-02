@@ -1,7 +1,6 @@
 class Tile:
-    def __init__(self, char, colour_lit, colour_dim, name):
+    def __init__(self, char, lit_colour, dim_colour, name):
         self.char=char
-        self.colour_lit=colour_lit
-        self.colour_dim=colour_dim
+        self.lit_colour=lit_colour
+        self.dim_colour=dim_colour
         self.name=name
-        self.explored=False

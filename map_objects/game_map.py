@@ -1,6 +1,7 @@
 import tcod
 import tcod.map
-from map_objects.generation import init_grass
+import numpy
+from map_objects.tile import Tile
 
 class GameMap:
     def __init__(self, width, height):
@@ -8,9 +9,11 @@ class GameMap:
         self.width=width
         self.height=height
         self.path_map=tcod.map.Map(width, height, 'C')
-        self.graphics_map=[[]]
         # Full of grass
-        init_grass(self)
+        self.path_map.walkable[:]=True
+        self.path_map.transparent[:]=True
+        self.graphics_map=numpy.full((height, width), Tile('.', (106, 190, 48), (75, 105, 47), 'Grass'))
+        self.explored=numpy.full((height, width), False)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
