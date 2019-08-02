@@ -1,0 +1,28 @@
+ASCII control characters
+00NULL(Null character)      01SOH(Start of Header)      02STX(Start of Text)        03ETX(End of Text)
+04EOT(End of Trans.)        05ENQ(Enquiry)              06ACK(Acknowledgement)      07BEL(Bell)
+08BS(Backspace)             09HT(Horizontal Tab)        10LF(Line feed)             11VT(Vertical Tab)
+12FF(Form feed)             13CR(Carriage return)       14SO(Shift Out)             15SI(Shift In)
+16DLE(Data link escape)     17DC1(Device control 1)     18DC2(Device control 2)     19DC3(Device control 3)
+20DC4(Device control 4)     21NAK(Negative acknowl.)    22SYN(Synchronous idle)     23ETB(End of trans. block)
+24CAN(Cancel)               25EM(End of medium)         26SUB(Substitute)           27ESC(Escape)
+28FS(File separator)        29GS(Group separator)       30RS(Record separator)      31US(Unit separator)
+127DEL(Delete)
+
+ASCII printable characters
+32spc 33!   34"   35#   36$   37%   38&   39'   40(   41)   42*   43+   44,   45-   46.   47/
+480   491   502   513   524   535   546   557   568   579   58:   59;   60<   61=   62>   63?
+64@   65A   66B   67C   68D   69E   70F   71G   72H   73I   74J   75K   76L   77M   78N   79O
+80P   81Q   82R   83S   84T   85U   86V   87W   88X   89Y   90Z   91[   92\   93]   94^   95_
+96`   97a   98b   99c   100d  101e  102f  103g  104h  105i  106j  107k  108l  109m  110n  111o
+112p  113q  114r  115s  116t  117u  118v  119w  120x  121y  122z  123{  124|  125}  126~
+
+Extended ASCII characters
+128Ç  129ü  130é  131â  132ä  133à  134å  135ç  136ê  137ë  138è  139ï  140î  141ì  142Ä  143Å
+144É  145æ  146Æ  147ô  148ö  149ò  150û  151ù  152ÿ  153Ö  154Ü  155ø  156£  157Ø  158×  159ƒ
+160á  161í  162ó  163ú  164ñ  165Ñ  166ª  167º  168¿  169®  170¬  171½  172¼  173¡  174«  175»
+176░  177▒  178▓  179│  180┤  181Á  182Â  183À  184©  185╣  186║  187╗  188╝  189¢  190¥  191┐
+192└  193┴  194┬  195├  196─  197┼  198ã  199Ã  200╚  201╔  202╩  203╦  204╠  205═  206╬  207¤
+208ð  209Ð  210Ê  211Ë  212È  213ı  214Í  215Î  216Ï  217┘  218┌  219█  220▄  221¦  222Ì  223▀
+224Ó  225ß  226Ô  227Ò  228õ  229Õ  230µ  231þ  232Þ  233Ú  234Û  235Ù  236ý  237Ý  238¯  239´
+240≡  241±  242‗  243¾  244¶  245§  246÷  247¸  248°  249¨  250·  251¹  252³  253²  254■  255nbsp
