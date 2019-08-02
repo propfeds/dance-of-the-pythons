@@ -2,7 +2,7 @@ import tcod
 from map_objects.tile import Tile
 from random import randint
 
-def generate_path_y(origin_x, origin_y, dest_y, tile, roughness, wind, swole, min_width, game_map):
+def cave_y(origin_x, origin_y, dest_y, tile, roughness, wind, swole, min_width, game_map):
     # step determines whether the algo runs up or down
     step=1
     if(origin_y>dest_y):
@@ -22,7 +22,7 @@ def generate_path_y(origin_x, origin_y, dest_y, tile, roughness, wind, swole, mi
         # Generates dirt path
         game_map.path_map.walkable[y, current_x:current_x+current_width]=True
         game_map.path_map.transparent[y, current_x:current_x+current_width]=True
-        game_map.graphics_map[y, current_x:current_x+current_width]=Tile('.', (138, 111, 48), (82, 75, 36))
+        game_map.graphics_map[y, current_x:current_x+current_width]=tile
         # This is where I could add events (a chance of a tent appearing on a branch from the path, or some fixture like torches).
     # Returns current_x because it's the end of the road (level transitions/'stairs')
     return current_x
