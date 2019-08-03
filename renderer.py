@@ -13,10 +13,10 @@ def render_all(root_console, display, entities, player, game_map, fov_recompute,
         for y in range(game_map.height):
             for x in range(game_map.width):
                 if game_map.path_map.fov[y, x]:
-                    display.tiles[["ch", "fg"]][y, x]=ord(game_map.graphics_map[y, x].char), (*game_map.graphics_map[y, x].lit_colour, 255)
+                    display.tiles[["ch", "fg"]][y, x]=ord(game_map.graphics_map[y, x].char), (*game_map.graphics_map[y, x].colour_lit, 255)
                     game_map.explored[y, x]=True
                 elif game_map.explored[y, x]:
-                    display.tiles[["ch", "fg"]][y, x]=ord(game_map.graphics_map[y, x].char), (*game_map.graphics_map[y, x].dim_colour, 255)
+                    display.tiles[["ch", "fg"]][y, x]=ord(game_map.graphics_map[y, x].char), (*game_map.graphics_map[y, x].colour_dim, 255)
     render_ordered_entities=sorted(entities, key=lambda x: x.render_order.value)
     for entity in render_ordered_entities:
         if game_map.path_map.fov[entity.y, entity.x]:

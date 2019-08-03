@@ -2,7 +2,7 @@ import tcod
 from renderer import RenderOrder
 
 class Entity:
-    def __init__(self, x, y, name, faction, char, colour, hp, attack, shield, render_order=RenderOrder.CORPSE, pathable=True, inventory=None, item=None, ai=None, guard=None):
+    def __init__(self, x, y, name, faction, char, colour, hp, attack, shield, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, item=None, ai=None, guard=None):
         self.x=x
         self.y=y
         self.name=name
@@ -16,7 +16,7 @@ class Entity:
         self.shield=shield
 
         self.render_order=render_order
-        self.pathable=pathable
+        self.walkable=walkable
         self.guard=guard
         # Whether the entity has an inventory
         self.inventory=inventory

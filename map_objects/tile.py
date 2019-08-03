@@ -1,5 +1,5 @@
 class Tile:
-    def __init__(self, char, lit_colour, dim_colour):
+    def __init__(self, char, colour_lit, colour_dim):
         self.char=char
-        self.lit_colour=lit_colour
-        self.dim_colour=dim_colour
+        self.colour_lit=colour_lit
+        self.colour_dim=colour_dim
