@@ -2,7 +2,7 @@ import tcod
 from map_objects.tile import Tile
 from random import randint
 
-def cave_y(origin_x, origin_y, dest_y, tile, roughness, wind, swole, min_width, game_map):
+def cave_y(origin_x, origin_y, dest_y, tile, roughness, wind, swole, min_width, max_width, game_map):
     # step determines whether the algo runs up or down
     step=1
     if(origin_y>dest_y):
@@ -13,6 +13,7 @@ def cave_y(origin_x, origin_y, dest_y, tile, roughness, wind, swole, min_width, 
         rough_roll=randint(0, 100)
         if rough_roll<roughness:
             current_width=max(min_width, current_width+randint(-swole, swole))
+            current_width=min(current_width, max_width)
         if y!=origin_y:
             wind_roll=randint(0, 100)
             if wind_roll<wind:
