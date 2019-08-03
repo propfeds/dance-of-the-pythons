@@ -25,7 +25,9 @@ def main():
     entities=[player]
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
     root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
-    display=tcod.console.Console(terminal_width, terminal_height, 'C') 
+    display=tcod.console.Console(terminal_width, terminal_height, 'C')
+    display.bg[:]=(57, 60, 50)
+    #display.default_bg_blend=tcod.BKGND_SET
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     # Then generate map
@@ -60,7 +62,7 @@ def main():
         if game_state==GameStates.PLAYER_TURN:
             if move:
                 dx, dy=move
-                if game_map.path_map.walkable[player.y+dy, player.x+dx]:
+                if game_map.path_map.walkable[player.y+dy, player.x+dx] and player.x+dx>=0 and player.y+dy>=0:
                     # target=get_blocking_entities(entities, player.x+dx, player.y+dy)
                     if False:
                         print('PLACEHOLDER')
