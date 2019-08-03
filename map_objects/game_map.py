@@ -17,10 +17,10 @@ class GameMap:
         self.explored=numpy.full((height, width), False)
         origin_x=3
         # Dirt paths
-        dest_x=generator.cave_y(origin_x, 0, 27, Tile('•', (138, 111, 48), (82, 75, 36)), 50, 50, 1, 1, 3, self)
-        dest_x=generator.cave_y(origin_x, 0, 27, Tile('•', (138, 111, 48), (82, 75, 36)), 100, 100, 1, 0, 2, self)
+        dest_x=generator.cave_y(origin_x, 0, self.height-6, Tile('•', (138, 111, 48), (82, 75, 36)), 50, 50, 1, 1, 3, self)
+        dest_x=generator.cave_y(origin_x, 0, self.height-1, Tile('•', (138, 111, 48), (82, 75, 36)), 100, 100, 1, 0, 2, self)
         # Dirt walls
-        
+
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
