@@ -4,6 +4,7 @@ import numpy
 import json
 from random import randint
 from map_objects.tile import Tile
+from map_objects.rectangle import Rectangle
 
 class GameMap:
     def __init__(self, width, height):
@@ -11,33 +12,37 @@ class GameMap:
         self.width=width
         self.height=height
         self.path_map=tcod.map.Map(width, height, 'C')
+        self.graphics_map=numpy.full((height, width), Tile(' ', (0, 0, 0), (0, 0, 0)))    # the void
+        self.destructible=numpy.full((height, width), False)
+        self.explored=numpy.full((height, width), False)
         # Importing tiles data (please only load at level 1)
         with open('data/tiles.json', encoding='utf-8') as data:
             self.tile_data=json.load(data)
         with open('gfx/colours/tiles.json', encoding='utf-8') as gfx:
             self.tile_gfx=json.load(gfx)
         # Test: Full of grass
-        self.path_map.walkable[:]=True
-        self.path_map.transparent[:]=True
-        self.graphics_map=numpy.full((height, width), Tile('.', (106, 190, 48), (57, 60, 50)))
-        self.destructible=numpy.full((height, width), True)
-        self.explored=numpy.full((height, width), False)
-        # Test: Dirt paths
+        self.fill_rect(Rectangle(0, 0, width, height), 'ground_grass')
         x_dest=self.cave_y(5, 0, self.height-6, 'ground_dirt', 50, 50, 1, 1, 3)
         x_dest=self.cave_y(5, 0, self.height-1, 'ground_dirt', 100, 100, 1, 0, 2)
-        # Test: Dirt walls
         y_dest=self.cave_x(13, 0, self.width-35, 'wall_dirt', 15, 15, 1, 1, 2)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
     
+    def fill_rect(self, rect, tile_name):
+        tile=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
+        self.graphics_map[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=tile
+        self.path_map.walkable[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['walkable']
+        self.path_map.transparent[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['transparent']
+        self.destructible[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['destructible']
+
     # www.roguebasin.com/index.php?title=Basic_directional_dungeon_generation
     # Pretty useful, can be used for caves, beaten paths (straight paths would be pretty slow I tell ya), rivers, etc
     # tile: fills the entire path with it
     # roughness (0~100%): how often the path changes in width throughout the journey
     # wind (0~100%): how often the path changes in left border
     # swole: how big of a change the path can get
-    # width_min: how smallest it could get
+    # width_min/max: how small/big it could get
 
     def cave_y(self, x_origin, y_origin, y_dest, tile_name, roughness, wind, swole, width_min, width_max):
         # Load tile
