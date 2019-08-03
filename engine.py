@@ -10,7 +10,7 @@ from input_handler import handle_event
 from factions import Factions
 
 def main():
-    # Importing data from data/config.json
+    # Importing data from config
     with open('data/config.json') as cfg:
         data=json.load(cfg)
     terminal_width=data['terminal_width']
