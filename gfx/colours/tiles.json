@@ -1,0 +1,38 @@
+{
+    "ground_dirt":
+    {
+        "char": "•",
+        "colour_lit": [138, 111, 48],
+        "colour_dim": [82, 75, 36]
+    },
+    "wall_dirt":
+    {
+        "char": "░",
+        "colour_lit": [138, 111, 48],
+        "colour_dim": [82, 75, 36]
+    },
+    "ground_grass":
+    {
+        "char": ".",
+        "colour_lit": [106, 190, 48],
+        "colour_dim": [57, 60, 50]
+    },
+    "wall_tree":
+    {
+        "char": "♣",
+        "colour_lit": [106, 190, 48],
+        "colour_dim": [57, 60, 50]
+    },
+    "wall_tent":
+    {
+        "char": "#",
+        "colour_lit": [143, 151, 74],
+        "colour_dim": [97, 99, 59]
+    },
+    "wall_tent_window":
+    {
+        "char": "+",
+        "colour_lit": [143, 151, 74],
+        "colour_dim": [97, 99, 59]
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "ground_dirt":
+    {
+        "walkable": true,
+        "transparent": true,
+        "destructible": true
+    },
+    "wall_dirt":
+    {
+        "walkable": false,
+        "transparent": false,
+        "destructible": true
+    },
+    "ground_grass":
+    {
+        "walkable": true,
+        "transparent": true,
+        "destructible": true
+    },
+    "wall_tree":
+    {
+        "walkable": false,
+        "transparent": false,
+        "destructible": true
+    },
+    "wall_tent":
+    {
+        "walkable": false,
+        "transparent": false,
+        "destructible": true
+    },
+    "wall_tent_window":
+    {
+        "walkable": false,
+        "transparent": true,
+        "destructible": true
+    }
+}
