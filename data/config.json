@@ -5,5 +5,5 @@
     "map_height": 27,
     "fov_algorithm": 12,
     "fov_light_walls": 1,
-    "fov_radius": 16
+    "fov_radius": 5
 }
