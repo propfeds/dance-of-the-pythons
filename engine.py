@@ -20,7 +20,6 @@ def main():
     fov_algorithm=data['fov_algorithm']
     fov_light_walls=bool(data['fov_light_walls'])
     fov_radius=data['fov_radius']
-
     # Init root console and player
     player=Entity(0, 0, 'Ratiel Snailface', Factions.ALLY, '@', tcod.brass, 5, 1, 0, RenderOrder.ACTOR, False, Inventory(26), None, None, None)
     entities=[player]

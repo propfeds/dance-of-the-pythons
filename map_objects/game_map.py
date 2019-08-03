@@ -3,7 +3,6 @@ import tcod.map
 import numpy
 import json
 from random import randint
-# import map_objects.generator as generator
 from map_objects.tile import Tile
 
 class GameMap:
@@ -13,9 +12,9 @@ class GameMap:
         self.height=height
         self.path_map=tcod.map.Map(width, height, 'C')
         # Importing tiles data (please only load at level 1)
-        with open('data/tiles.json') as data:
+        with open('data/tiles.json', encoding='utf-8') as data:
             self.tile_data=json.load(data)
-        with open('gfx/colours/tiles.json') as gfx:
+        with open('gfx/colours/tiles.json', encoding='utf-8') as gfx:
             self.tile_gfx=json.load(gfx)
         # Test: Full of grass
         self.path_map.walkable[:]=True
@@ -43,7 +42,6 @@ class GameMap:
     def cave_y(self, x_origin, y_origin, y_dest, tile_name, roughness, wind, swole, width_min, width_max):
         # Load tile
         tile=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
-        print(tile.char)
         # step determines whether the algo runs up or down
         step=1
         if(y_origin>y_dest):
@@ -68,5 +66,33 @@ class GameMap:
             # This is where I could add events (a chance of a tent appearing on a branch from the path, or some fixture like torches).
         # Returns x_current because it's the end of the road (level transitions/'stairs')
         return x_current
+
+    def cave_x(self, y_origin, x_origin, x_dest, tile_name, roughness, wind, swole, height_min, height_max):
+        # Load tile
+        tile=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
+        # step determines whether the algo runs up or down
+        step=1
+        if(x_origin>x_dest):
+            step=-1
+        height_current=height_min
+        y_current=y_origin
+        for x in range(x_origin, x_dest+step, step):
+            roll_rough=randint(0, 100)
+            if roll_rough<roughness:
+                height_current=max(height_min, height_current+randint(-swole, swole))
+                height_current=min(height_current, height_max)
+            if x!=x_origin:
+                wind_roll=randint(0, 100)
+                if wind_roll<wind:
+                    y_current=max(0, y_current+randint(-swole, swole))
+                    y_current=min(y_current, self.height-height_min)
+            # Implement per-tile transparent/walkable database/factory please, or actual grass classes or sth
+            self.path_map.walkable[y_current:y_current+height_current, x]=self.tile_data[tile_name]['walkable']
+            self.path_map.transparent[y_current:y_current+height_current, x]=self.tile_data[tile_name]['transparent']
+            self.destructible[y_current:y_current+height_current, x]=self.tile_data[tile_name]['destructible']
+            self.graphics_map[y_current:y_current+height_current, x]=tile
+            # This is where I could add events (a chance of a tent appearing on a branch from the path, or some fixture like torches).
+        # Returns x_current because it's the end of the road (level transitions/'stairs')
+        return y_current
 
     
