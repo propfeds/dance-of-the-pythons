@@ -22,11 +22,11 @@ class GameMap:
         self.graphics_map=numpy.full((height, width), Tile('.', (106, 190, 48), (57, 60, 50)))
         self.destructible=numpy.full((height, width), True)
         self.explored=numpy.full((height, width), False)
-        x_origin=3
         # Test: Dirt paths
-        x_dest=self.cave_y(x_origin, 0, self.height-6, 'ground_dirt', 50, 50, 1, 1, 3)
-        x_dest=self.cave_y(x_origin, 0, self.height-1, 'ground_dirt', 100, 100, 1, 0, 2)
+        x_dest=self.cave_y(5, 0, self.height-6, 'ground_dirt', 50, 50, 1, 1, 3)
+        x_dest=self.cave_y(5, 0, self.height-1, 'ground_dirt', 100, 100, 1, 0, 2)
         # Test: Dirt walls
+        y_dest=self.cave_x(13, 0, self.width-35, 'wall_dirt', 15, 15, 1, 1, 2)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
