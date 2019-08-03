@@ -26,8 +26,7 @@ def main():
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
     root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
     display=tcod.console.Console(terminal_width, terminal_height, 'C')
-    display.bg[:]=(57, 60, 50)
-    #display.default_bg_blend=tcod.BKGND_SET
+    display.bg[:]=(22, 33, 11)
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     # Then generate map
