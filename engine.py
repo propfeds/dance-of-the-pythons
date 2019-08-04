@@ -21,7 +21,7 @@ def main():
     fov_light_walls=bool(data['fov_light_walls'])
     fov_radius=data['fov_radius']
     # Init root console and player
-    player=Entity(0, 0, 'Ratiel Snailface', Factions.ALLY, '@', tcod.brass, 5, 1, 0, RenderOrder.ACTOR, False, Inventory(26), None, None, None)
+    player=Entity(0, 0, 'Ratiel Snailface', Factions.ALLY, '@', tcod.brass, 5, 1, 0, 15, RenderOrder.ACTOR, False, Inventory(26), None, None)
     entities=[player]
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
     root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
