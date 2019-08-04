@@ -15,6 +15,7 @@
         "shield": 0,
         "alert_threshold": 10,
         "walkable": false,
-        "ai": "snake_head"
+        "inventory_capacity": 0,
+        "ai": "reptile_head"
     }
 }
