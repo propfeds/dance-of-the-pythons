@@ -16,7 +16,7 @@ def handle_key(event, game_state):
     # Global exit: Cancels targeting, exits menus and pulls up menu while playing
     if event.scancode==tcod.KEY_ESCAPE:
         return {'exit': True}
-    if game_state==GameStates.PLAYER_TURN:
+    if game_state==GameStates.TURN_PLAYER:
         return handle_player_key(event)
     return {}
 
