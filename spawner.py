@@ -67,8 +67,23 @@ class Spawner:
             self.entities.append('fuckoff')
             return {'spawned': True}
 
-    def spawn_item(self, x, y, entity_name):
+    def spawn_item(self, x, y, entity_name, item_component):
         # Items can spawn beneath actors
+        if not self.path_map.walkable[y, x]:
+            return {'spawned': False}
+        else:
+            self.entities.append('fuckoff')
+            return {'spawned': True}
+
+    def spawn_furniture(self, x, y, entity_name):
+        if self.check_collision(x, y):
+            return {'spawned': False}
+        else:
+            self.entities.append('fuckoff')
+            return {'spawned': True}
+    
+    def spawn_environment(self, x, y, environment_component):
+        # Environment entities can spawn beneath actors
         if not self.path_map.walkable[y, x]:
             return {'spawned': False}
         else:
