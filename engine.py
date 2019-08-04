@@ -22,7 +22,7 @@ def main():
     fov_radius=data['fov_radius']
     # Init root console
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
-    root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
+    root_console=tcod.console_init_root(terminal_width, terminal_height, 'Python: Dance of Yuwanda\'s Blessing', False, tcod.RENDERER_SDL2, 'C', False)
     display=tcod.console.Console(terminal_width, terminal_height, 'C')
     display.bg[:]=(8, 19, 4)
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
