@@ -1,4 +1,5 @@
 import json
+from ai import get_ai
 from enum import Enum
 from renderer import RenderOrder
 from entity import Entity
@@ -51,7 +52,7 @@ class Spawner:
         if self.check_collision(x, y):
             return {'spawned': False}
         else:
-            entity=Entity(x, y, entity_name, faction, self.gfx_actors[entity_name]['char'], tuple(self.gfx_actors[entity_name]['colour']), self.data_actors[entity_name]['hp_max'], self.data_actors[entity_name]['attack'], self.data_actors[entity_name]['shield'], self.data_actors[entity_name]['alert_threshold'], RenderOrder.ACTOR, self.data_actors[entity_name]['walkable'], Inventory(self.data_actors[entity_name]['inventory_capacity']), (None if (entity_name=='player') else self.data_actors[entity_name]['ai']))
+            entity=Entity(x, y, entity_name, faction, self.gfx_actors[entity_name]['char'], tuple(self.gfx_actors[entity_name]['colour']), self.data_actors[entity_name]['hp_max'], self.data_actors[entity_name]['attack'], self.data_actors[entity_name]['shield'], self.data_actors[entity_name]['alert_threshold'], RenderOrder.ACTOR, self.data_actors[entity_name]['walkable'], Inventory(self.data_actors[entity_name]['inventory_capacity']), (None if (entity_name=='player') else get_ai(self.data_actors[entity_name]['ai'])))
             self.entities.append(entity)
             return {'spawned': True}
 
