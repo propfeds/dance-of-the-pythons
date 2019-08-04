@@ -70,8 +70,6 @@ class GameMap:
         return x_current
 
     def cave_x(self, y_origin, x_origin, x_dest, tile_name, roughness, wind, swole, height_min, height_max):
-        # Load tile
-        tile=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
         # step determines whether the algo runs up or down
         step=1
         if(x_origin>x_dest):
@@ -88,11 +86,7 @@ class GameMap:
                 if wind_roll<wind:
                     y_current=max(0, y_current+randint(-swole, swole))
                     y_current=min(y_current, self.height-height_min)
-            # Implement per-tile transparent/walkable database/factory please, or actual grass classes or sth
-            self.path_map.walkable[y_current:y_current+height_current, x]=self.tile_data[tile_name]['walkable']
-            self.path_map.transparent[y_current:y_current+height_current, x]=self.tile_data[tile_name]['transparent']
-            self.destructible[y_current:y_current+height_current, x]=self.tile_data[tile_name]['destructible']
-            self.graphics_map[y_current:y_current+height_current, x]=tile
+            self.fill_rect(Rectangle(x, y_current, 1, height_current), tile_name)
             # This is where I could add events (a chance of a tent appearing on a branch from the path, or some fixture like torches).
         # Returns x_current because it's the end of the road (level transitions/'stairs')
         return y_current
