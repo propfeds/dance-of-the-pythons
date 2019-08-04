@@ -34,8 +34,7 @@ class GameMap:
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
     
     def fill_rect(self, rect, tile_name):
-        tile=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
-        self.graphics_map[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=tile
+        self.graphics_map[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
         self.path_map.walkable[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['walkable']
         self.path_map.transparent[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['transparent']
         self.destructible[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['destructible']
@@ -49,8 +48,6 @@ class GameMap:
     # width_min/max: how small/big it could get
 
     def cave_y(self, x_origin, y_origin, y_dest, tile_name, roughness, wind, swole, width_min, width_max):
-        # Load tile
-        tile=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
         # step determines whether the algo runs up or down
         step=1
         if(y_origin>y_dest):
@@ -67,11 +64,7 @@ class GameMap:
                 if wind_roll<wind:
                     x_current=max(0, x_current+randint(-swole, swole))
                     x_current=min(x_current, self.width-width_min)
-            # Implement per-tile transparent/walkable database/factory please, or actual grass classes or sth
-            self.path_map.walkable[y, x_current:x_current+width_current]=self.tile_data[tile_name]['walkable']
-            self.path_map.transparent[y, x_current:x_current+width_current]=self.tile_data[tile_name]['transparent']
-            self.destructible[y, x_current:x_current+width_current]=self.tile_data[tile_name]['destructible']
-            self.graphics_map[y, x_current:x_current+width_current]=tile
+            self.fill_rect(Rectangle(x_current, y, width_current, 1), tile_name)
             # This is where I could add events (a chance of a tent appearing on a branch from the path, or some fixture like torches).
         # Returns x_current because it's the end of the road (level transitions/'stairs')
         return x_current
