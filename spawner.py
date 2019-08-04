@@ -45,7 +45,8 @@ class Spawner:
             return {'spawned': True}
 
     def spawn_item(self, x, y, entity_name):
-        if self.check_collision(x, y):
+        # Items can spawn beneath actors
+        if not self.path_map.walkable[y, x]:
             return {'spawned': False}
         else:
             self.entities.append('fuckoff')
