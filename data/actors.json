@@ -1,0 +1,20 @@
+{
+    "player":
+    {
+        "hp_max": 5,
+        "attack": 1,
+        "shield": 0,
+        "alert_threshold": 15,
+        "walkable": true,
+        "inventory_capacity": 26
+    },
+    "snek_test":
+    {
+        "hp_max": 300,
+        "attack": 0,
+        "shield": 0,
+        "alert_threshold": 10,
+        "walkable": false,
+        "ai": "snake_head"
+    }
+}

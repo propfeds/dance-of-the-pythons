@@ -5,7 +5,8 @@ class RenderOrder(Enum):
     CORPSE=0
     ITEM=1
     ENVIRONMENT=2   # Bushes / tall grass, explosion smoke, particles
-    ACTOR=3
+    FURNITURE=3
+    ACTOR=4
 
 def render_all(root_console, display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state):
     # [y, x] arrays remember
