@@ -8,11 +8,12 @@ from map_objects.rectangle import Rectangle
 
 class GameMap:
     def __init__(self, width, height):
-        # path_map (class tcod.map.Map) holds pathability and sight, graphics_map holds graphical info
+        # path_map (class tcod.map.Map) holds pathability and sight, graphics holds graphical info
         self.width=width
         self.height=height
+        # The void
         self.path_map=tcod.map.Map(width, height, 'C')
-        self.graphics_map=numpy.full((height, width), Tile(' ', (0, 0, 0), (0, 0, 0)))    # the void
+        self.graphics=numpy.full((height, width), Tile(' ', (0, 0, 0), (0, 0, 0)))
         self.destructible=numpy.full((height, width), False)
         self.explored=numpy.full((height, width), False)
         # Importing tiles data (please only load at level 1)
@@ -34,7 +35,7 @@ class GameMap:
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
     
     def fill_rect(self, rect, tile_name):
-        self.graphics_map[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
+        self.graphics[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
         self.path_map.walkable[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['walkable']
         self.path_map.transparent[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['transparent']
         self.destructible[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['destructible']
