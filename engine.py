@@ -7,7 +7,7 @@ from entity import Entity
 from renderer import RenderOrder, render_all, clear_all
 from game_states import GameStates
 from input_handler import handle_event
-from spawner import Factions
+from spawner import Spawner, Factions
 
 def main():
     # Importing data from config
@@ -20,15 +20,16 @@ def main():
     fov_algorithm=data['fov_algorithm']
     fov_light_walls=data['fov_light_walls']
     fov_radius=data['fov_radius']
-    # Init root console and player
-    player=Entity(0, 0, 'Ratiel Snailface', Factions.ALLY, '@', (217, 160, 102), 5, 1, 0, 15, RenderOrder.ACTOR, False, Inventory(26))
-    entities=[player]
+    # Init root console
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
     root_console=tcod.console_init_root(terminal_width, terminal_height, 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
     display=tcod.console.Console(terminal_width, terminal_height, 'C')
     display.bg[:]=(8, 19, 4)
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
+    spawner=Spawner(map_width, map_height, 0, game_map.path_map)
+    spawner.spawn_ally(0, 0, 'player')
+    player=spawner.entities[0]
     # Then generate map
     fov_recompute=True
     # message log
@@ -37,7 +38,7 @@ def main():
     #targeting_item=None
     # Rendering for the first time
     game_map.recompute_fov(player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
-    render_all(root_console, display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
+    render_all(root_console, display, spawner.entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
     fov_recompute=False
     tcod.console_flush()
     # Game loop
@@ -45,10 +46,10 @@ def main():
         # Render
         if fov_recompute:
             game_map.recompute_fov(player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
-        render_all(root_console, display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
+        render_all(root_console, display, spawner.entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
         fov_recompute=False
         tcod.console_flush()
-        clear_all(display, entities)
+        clear_all(display, spawner.entities)
         # Processing action
         action=handle_event(game_state)
         move=action.get('move')
@@ -72,7 +73,7 @@ def main():
                         fov_recompute=True
                     game_state=GameStates.TURN_ALLY
             elif pickup: # Should implement a pickup list like POWDER
-                for entity in entities:
+                for entity in spawner.entities:
                     if entity.item and entity.x==player.x and entity.y==player.y:
                         print('ADD ITEM')   # Add item
                         break
