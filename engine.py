@@ -28,7 +28,7 @@ def main():
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     spawner=Spawner(map_width, map_height, 0, game_map.path_map)
-    spawner.spawn_ally(0, 0, 'player')
+    spawner.spawn_actor(0, 0, 'player', Factions.ALLY)
     player=spawner.entities[0]
     # Then generate map
     fov_recompute=True
