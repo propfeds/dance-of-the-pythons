@@ -32,7 +32,7 @@ def main():
     # Then generate map
     fov_recompute=True
     # message log
-    game_state=GameStates.PLAYER_TURN
+    game_state=GameStates.TURN_PLAYER
     prev_game_state=game_state
     #targeting_item=None
     # Rendering for the first time
@@ -56,9 +56,9 @@ def main():
         take_inventory=action.get('take_inventory')
         fullscreen=action.get('fullscreen')
         exit=action.get('exit')
-
-        player_turn_results=[]
-        if game_state==GameStates.PLAYER_TURN:
+        # Player's Turn
+        player_results=[]
+        if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
                 if game_map.path_map.walkable[player.y+dy, player.x+dx] and player.x+dx>=0 and player.y+dy>=0:
@@ -70,7 +70,7 @@ def main():
                     else:
                         player.move(dx, dy)
                         fov_recompute=True
-                    game_state=GameStates.ALLY_TURN
+                    game_state=GameStates.TURN_ALLY
             elif pickup: # Should implement a pickup list like POWDER
                 for entity in entities:
                     if entity.item and entity.x==player.x and entity.y==player.y:
@@ -81,13 +81,13 @@ def main():
         
         if take_inventory:
             prev_game_state=game_state
-            game_state=GameStates.INVENTORY
+            game_state=GameStates.MENU_INVENTORY
         
         if exit:
             if game_state.value>=10:  # Game states >= 10 are menus: inventory, quipment, etc.
                 game_state=prev_game_state
             if game_state.value>=20:  # Game states >= 20 are targetings
-                player_turn_results.append({'targeting_cancelled': True})
+                player_results.append({'targeting_cancelled': True})
             # else brings up main menu
         
         if fullscreen:
@@ -96,14 +96,14 @@ def main():
         # Player turn messages
 
         # Faction turns (includes message logs built within)
-        if game_state==GameStates.ALLY_TURN:
-                game_state=GameStates.ENEMY_TURN
+        if game_state==GameStates.TURN_ALLY:
+                game_state=GameStates.TURN_ENEMY
         
-        if game_state==GameStates.ENEMY_TURN:
-                game_state=GameStates.NEUTRAL_TURN
+        if game_state==GameStates.TURN_ENEMY:
+                game_state=GameStates.TURN_NEUTRAL
         
-        if game_state==GameStates.NEUTRAL_TURN:
-                game_state=GameStates.PLAYER_TURN
+        if game_state==GameStates.TURN_NEUTRAL:
+                game_state=GameStates.TURN_PLAYER
 
 
 if __name__=='__main__':
