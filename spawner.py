@@ -36,6 +36,9 @@ class Spawner:
         
 
     def check_collision(self, x, y):
+        # Colliding with the offworld
+        if x<0 or y<0 or x>=self.width or y>=self.height:
+            return True
         if not self.path_map.walkable[y, x]:
             return True
         for entity in self.entities:
