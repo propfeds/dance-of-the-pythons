@@ -2,6 +2,7 @@ import json
 from enum import Enum
 from renderer import RenderOrder
 from entity import Entity
+from components.inventory import Inventory
 
 class Factions(Enum):
     NEUTRAL=0
@@ -50,7 +51,8 @@ class Spawner:
         if self.check_collision(x, y):
             return {'spawned': False}
         else:
-            self.entities.append('fuckoff')
+            entity=Entity(x, y, entity_name, Factions.ALLY, self.gfx_actors[entity_name]['char'], tuple(self.gfx_actors[entity_name]['colour']), self.data_actors[entity_name]['hp_max'], self.data_actors[entity_name]['attack'], self.data_actors[entity_name]['shield'], self.data_actors[entity_name]['alert_threshold'], RenderOrder.ACTOR, self.data_actors[entity_name]['walkable'], Inventory(self.data_actors[entity_name]['inventory_capacity']), (None if (entity_name=='player') else self.data_actors[entity_name]['ai']))
+            self.entities.append()
             return {'spawned': True}
 
     def spawn_enemy(self, x, y, entity_name):
