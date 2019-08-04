@@ -7,7 +7,7 @@ from entity import Entity
 from renderer import RenderOrder, render_all, clear_all
 from game_states import GameStates
 from input_handler import handle_event
-from factions import Factions
+from spawner import Factions
 
 def main():
     # Importing data from config
