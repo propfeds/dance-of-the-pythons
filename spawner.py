@@ -1,3 +1,4 @@
+import json
 from enum import Enum
 from renderer import RenderOrder
 from entity import Entity
@@ -14,6 +15,25 @@ class Spawner:
         self.level=level
         self.path_map=path_map
         self.entities=[]
+        # Loading data
+        with open('data/items.json') as data:
+            self.data_items=json.load(data)
+        with open('data/environment.json') as data:
+            self.data_environment=json.load(data)
+        with open('data/furniture.json') as data:
+            self.data_furniture=json.load(data)
+        with open('data/actors.json') as data:
+            self.data_actors=json.load(data)
+
+        with open('gfx/colours/items.json', encoding='utf-8') as gfx:
+            self.gfx_items=json.load(gfx)
+        with open('gfx/colours/environment.json', encoding='utf-8') as gfx:
+            self.gfx_environment=json.load(gfx)
+        with open('gfx/colours/furniture.json', encoding='utf-8') as gfx:
+            self.gfx_furniture=json.load(gfx)
+        with open('gfx/colours/actors.json', encoding='utf-8') as gfx:
+            self.gfx_actors=json.load(gfx)
+        
 
     def check_collision(self, x, y):
         if not self.path_map.walkable[y, x]:
