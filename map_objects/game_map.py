@@ -22,9 +22,13 @@ class GameMap:
             self.tile_gfx=json.load(gfx)
         # Test: Full of grass
         self.fill_rect(Rectangle(0, 0, width, height), 'ground_grass')
-        x_dest=self.cave_y(5, 0, self.height-6, 'ground_dirt', 50, 50, 1, 1, 3)
+        x_dest=self.cave_y(5, 0, self.height-6, 'ground_dirt', 35, 50, 1, 1, 3)
         x_dest=self.cave_y(5, 0, self.height-1, 'ground_dirt', 100, 100, 1, 0, 2)
-        y_dest=self.cave_x(13, 0, self.width-35, 'wall_dirt', 15, 15, 1, 1, 2)
+        self.fill_rect(Rectangle(3, self.height-8, 5, 5), 'wall_tent')
+        self.fill_rect(Rectangle(5, self.height-8, 1, 1), 'wall_tent_window')
+        self.fill_rect(Rectangle(4, self.height-7, 3, 3), 'ground_dirt')
+        x_dest=self.cave_y(21, 0, self.height-7, 'wall_tree', 78, 78, 1, 3, 5)
+        y_dest=self.cave_x(13, 0, self.width-30, 'wall_dirt', 15, 15, 1, 1, 2)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)

@@ -1,9 +1,9 @@
 class Rectangle:
     def __init__(self, x, y, w, h):
         self.x1=x
-        self.x2=x+w
+        self.x2=x+w-1
         self.y1=y
-        self.y2=y+h
+        self.y2=y+h-1
 
     def centre(self):
         return (int((self.x1+self.x2)/2), int((self.y1+self.y2)/2))
