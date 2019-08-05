@@ -2,10 +2,11 @@ import tcod
 from enum import Enum
 
 class RenderOrder(Enum):
-    CORPSE=0
-    ITEM=1
-    ENVIRONMENT=2   # Bushes / tall grass, explosion smoke, particles
-    FURNITURE=3
+    CORPSE=-1
+    ITEM=0
+    FURNITURE=1
+    ACTOR_SHORT=2   # Mice, snakes
+    ENVIRONMENT=3   # explosion smoke, particles
     ACTOR=4
 
 def render_all(root_console, display, entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state):
