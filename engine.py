@@ -82,11 +82,10 @@ def main():
                             print('A')  # reemmber to extend results
                             game_state=GameStates.TURN_ALLY
                         else:
-                            #erase_entity(display, player)
-                            player.move(dx, dy, spawner.block_map)
                             if (not target.walkable) and (not player.walkable): # Non sneks (cheesy circumvention) and if player is in mouse form or sth they'll phase into the enemy
-                                target.move(-dx, -dy, spawner.block_map)
-                                player_results.extend({'swap': target})
+                                player_results.extend(player.swap(target))
+                            else:
+                                player.move(dx, dy, spawner.block_map)
                             game_state=GameStates.TURN_ALLY
                     elif (not response.get('blocked')) and (not response.get('outofbounds')):
                         player.move(dx, dy, spawner.block_map)

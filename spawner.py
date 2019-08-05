@@ -18,7 +18,7 @@ class Spawner:
         self.level=level
         # Path map is terrain blockade, block map is entity blockade
         self.path_map=path_map
-        self.block_map=numpy.full((height, width), 0)
+        self.block_map=numpy.full((height, width), False)
         self.entities=[]
         # Loading data
         with open('data/entities.json') as data:
@@ -35,7 +35,7 @@ class Spawner:
             return {'outofbounds': True}
         if not self.path_map.walkable[y, x]:
             return {'blocked': True}
-        if self.block_map[y, x]>=0:
+        if self.block_map[y, x]:
             for entity in self.entities:
                 if entity.x==x and entity.y==y and (not entity.walkable):
                     return {'collide': entity}
@@ -49,7 +49,7 @@ class Spawner:
             short=self.entity_data['actors'][entity_name]['walkable']
             entity=Entity(x, y, entity_name, faction, self.entity_gfx['actors'][entity_name]['char'], tuple(self.palette[self.entity_gfx['actors'][entity_name]['colour']]), self.entity_data['actors'][entity_name]['hp_max'], self.entity_data['actors'][entity_name]['attack'], self.entity_data['actors'][entity_name]['shield'], self.entity_data['actors'][entity_name]['alert_threshold'], (RenderOrder.ACTOR_SHORT if short else RenderOrder.ACTOR), short, Inventory(self.entity_data['actors'][entity_name]['inventory_capacity']), (None if (entity_name=='player') else get_ai(self.entity_data['actors'][entity_name]['ai'])))
             self.entities.append(entity)
-            self.block_map[y, x]+=(1-short)
+            self.block_map[y, x]=(not short)
             return {'spawned': True}
 
     def spawn_furniture(self, x, y, entity_name):

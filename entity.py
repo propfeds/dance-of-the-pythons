@@ -35,7 +35,18 @@ class Entity:
             self.environment.owner=self
 
     def move(self, dx, dy, block_map):
-        block_map[self.y, self.x]-=(1-self.walkable)
+        if not self.walkable:
+            block_map[self.y, self.x]=False
         self.x+=dx
         self.y+=dy
-        block_map[self.y, self.x]+=(1-self.walkable)
+        if not self.walkable:
+            block_map[self.y, self.x]=(not self.walkable)
+
+    def swap(self, target):
+        x=self.x
+        y=self.y
+        self.x=target.x
+        self.y=target.y
+        target.x=x
+        target.y=y
+        return {'swap': target}
