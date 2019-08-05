@@ -3,8 +3,8 @@ from enum import Enum
 
 class RenderOrder(Enum):
     CORPSE=-1
-    ITEM=0
-    FURNITURE=1
+    FURNITURE=0
+    ITEM=1
     ACTOR_SHORT=2   # Mice, snakes
     ENVIRONMENT=3   # explosion smoke, particles
     ACTOR=4

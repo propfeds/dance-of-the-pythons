@@ -41,7 +41,9 @@ class Spawner:
         if self.check_collision(x, y):
             return {'spawned': False}
         else:
-            entity=Entity(x, y, entity_name, faction, self.entity_gfx['actors'][entity_name]['char'], tuple(self.palette[self.entity_gfx['actors'][entity_name]['colour']]), self.entity_data['actors'][entity_name]['hp_max'], self.entity_data['actors'][entity_name]['attack'], self.entity_data['actors'][entity_name]['shield'], self.entity_data['actors'][entity_name]['alert_threshold'], RenderOrder.ACTOR, self.entity_data['actors'][entity_name]['walkable'], Inventory(self.entity_data['actors'][entity_name]['inventory_capacity']), (None if (entity_name=='player') else get_ai(self.entity_data['actors'][entity_name]['ai'])))
+            # If short you can walk through ;)
+            short=self.entity_data['actors'][entity_name]['walkable']
+            entity=Entity(x, y, entity_name, faction, self.entity_gfx['actors'][entity_name]['char'], tuple(self.palette[self.entity_gfx['actors'][entity_name]['colour']]), self.entity_data['actors'][entity_name]['hp_max'], self.entity_data['actors'][entity_name]['attack'], self.entity_data['actors'][entity_name]['shield'], self.entity_data['actors'][entity_name]['alert_threshold'], (RenderOrder.ACTOR_SHORT if short else RenderOrder.ACTOR), short, Inventory(self.entity_data['actors'][entity_name]['inventory_capacity']), (None if (entity_name=='player') else get_ai(self.entity_data['actors'][entity_name]['ai'])))
             self.entities.append(entity)
             return {'spawned': True}
 
