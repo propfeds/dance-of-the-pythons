@@ -120,21 +120,21 @@ def main():
         # Faction turns (handled by an announcer also)
         if game_state==GameStates.TURN_ALLY:
             for entity in spawner.entities:
-                if entity.faction==Factions.ALLY:
-                    results_ally=entity.take_turn()
+                if entity.faction==Factions.ALLY and entity!=player:
+                    results_ally=entity.ai.take_turn()
             game_state=GameStates.TURN_ENEMY
         
         if game_state==GameStates.TURN_ENEMY:
             for entity in spawner.entities:
                 if entity.faction==Factions.ENEMY:
-                    results_enemy=entity.take_turn()
+                    results_enemy=entity.ai.take_turn()
             game_state=GameStates.TURN_NEUTRAL
         
         if game_state==GameStates.TURN_NEUTRAL:
             for entity in spawner.entities:
                 if entity.faction==Factions.NEUTRAL:
                     if entity.ai:
-                        resutls_neutral=entity.take_turn()
+                        resutls_neutral=entity.ai.take_turn()
             game_state=GameStates.TURN_PLAYER
 
 
