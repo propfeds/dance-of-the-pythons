@@ -34,6 +34,8 @@ class GameMap:
         self.fill_rect(Rectangle(5, self.height-8, 1, 1), 'ground_dirt')
         self.fill_rect(Rectangle(4, self.height-7, 3, 3), 'ground_grass')
         y_dest=self.cave_x(13, 0, self.width-30, 'wall_dirt', 15, 15, 1, 1, 2)
+        x_dest=y_dest
+        y_dest=x_dest
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)

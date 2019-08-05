@@ -5,7 +5,7 @@
         {
             "hp_max": 5,
             "attack": 1,
-            "shield": 0,
+            "shield": 300,
             "alert_threshold": 15,
             "walkable": false,
             "inventory_capacity": 26
@@ -18,7 +18,7 @@
             "alert_threshold": 10,
             "walkable": true,
             "inventory_capacity": 0,
-            "ai": "reptile_head"
+            "ai": "neutral"
         }
     },
     "environment":

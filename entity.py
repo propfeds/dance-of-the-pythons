@@ -35,7 +35,7 @@ class Entity:
             self.environment.owner=self
 
     def move(self, dx, dy, path_map):
-        path_map.walkable[self.y, self.x]=False
+        path_map.walkable[self.y, self.x]=True
         self.x+=dx
         self.y+=dy
         path_map.walkable[self.y, self.x]=self.walkable

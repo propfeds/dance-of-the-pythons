@@ -8,6 +8,7 @@ from renderer import RenderOrder, render_all, clear_all
 from game_states import GameStates
 from input_handler import handle_event
 from spawner import Spawner, Factions
+from ai import NeutralAggro
 
 def main():
     # Importing data from config
@@ -62,19 +63,33 @@ def main():
         exit=action.get('exit')
         # Player's Turn
         player_results=[]
+        # Results: Extend if player turn ends and append if doesn't?
         if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
-                if game_map.path_map.walkable[player.y+dy, player.x+dx] and player.x+dx>=0 and player.y+dy>=0:
-                    # target=get_blocking_entities(entities, player.x+dx, player.y+dy)
-                    if False:
-                        print('PLACEHOLDER')
-                    # if target:
-                        # depends on object: if enemy attack, if ally swap, if vendor/chest interact
-                    else:
-                        player.move(dx, dy)
+                if not (dx==0 and dy==0):
+                    response=spawner.check_collision(player.x+dx, player.y+dy)
+                    target=response.get('collide')
+                    if target:
+                        # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)
+                        if target.faction==Factions.ENEMY or target.ai==NeutralAggro():
+                            print('A')  # reemmber to extend results
+                            game_state=GameStates.TURN_ALLY
+                        else:
+                            player.move(dx, dy, game_map.path_map)
+                            if (not target.walkable) and (not player.walkable): # Non sneks (cheesy circumvention) and if player is in mouse form or sth they'll phase into the enemy
+                                target.move(-dx, -dy, game_map.path_map)
+                                player_results.extend({'swap': target})
+                            game_state=GameStates.TURN_ALLY
+                    elif (not response.get('blocked')) and (not response.get('outofbounds')):
+                        player.move(dx, dy, game_map.path_map)
                         fov_recompute=True
+                        game_state=GameStates.TURN_ALLY
+                else:
+                    player_results.extend({'wait': True})
+                    print('I\'m still waiting')
                     game_state=GameStates.TURN_ALLY
+
             elif pickup: # Should implement a pickup list like POWDER
                 for entity in spawner.entities:
                     if entity.item and entity.x==player.x and entity.y==player.y:
@@ -97,9 +112,9 @@ def main():
         if fullscreen:
             tcod.console_set_fullscreen(not tcod.console_is_fullscreen())
 
-        # Player turn messages
+        # Player turn messages: handled by an announcer (translation friendly probably)
 
-        # Faction turns (includes message logs built within)
+        # Faction turns (handled by an announcer also)
         if game_state==GameStates.TURN_ALLY:
                 game_state=GameStates.TURN_ENEMY
         

@@ -5,7 +5,7 @@ class RenderOrder(Enum):
     CORPSE=-1
     FURNITURE=0
     ITEM=1
-    ACTOR_SHORT=2   # Mice, snakes
+    ACTOR_SHORT=2   # Mice
     ENVIRONMENT=3   # explosion smoke, particles
     ACTOR=4
 
