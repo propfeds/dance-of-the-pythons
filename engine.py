@@ -86,6 +86,7 @@ def main():
                                 player_results.extend(player.swap(target))
                             else:
                                 player.move(dx, dy, spawner.block_map)
+                            fov_recompute=True
                             game_state=GameStates.TURN_ALLY
                     elif (not response.get('blocked')) and (not response.get('outofbounds')):
                         player.move(dx, dy, spawner.block_map)
