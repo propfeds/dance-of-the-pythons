@@ -4,12 +4,12 @@
         "player":
         {
             "char": "@",
-            "colour": [217, 160, 102]
+            "colour": "skin_brown"
         },
         "snek_test":
         {
             "char": "s",
-            "colour": [153, 229, 80]
+            "colour": "bright_green"
         }
     },
     "environment":
@@ -17,7 +17,7 @@
         "smoke_explosion":
         {
             "char": "░",
-            "colour": [105, 106, 106],
+            "colour": "grey_orange",
             "alpha_max": 128
         }
     },

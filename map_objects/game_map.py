@@ -21,6 +21,8 @@ class GameMap:
             self.tile_data=json.load(data)
         with open('gfx/colours/tiles.json', encoding='utf-8') as gfx:
             self.tile_gfx=json.load(gfx)
+        with open('gfx/colours/palette.json') as colours:
+            self.palette=json.load(colours)
         # Test: Full of grass
         self.fill_rect(Rectangle(0, 0, width, height), 'ground_grass')
         x_dest=self.cave_y(5, 0, self.height-6, 'ground_dirt', 35, 50, 1, 1, 3)
@@ -37,7 +39,7 @@ class GameMap:
         self.path_map.compute_fov(x, y, radius, light_walls, algorithm)
     
     def fill_rect(self, rect, tile_name):
-        self.graphics[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=Tile(self.tile_gfx[tile_name]['char'], tuple(self.tile_gfx[tile_name]['colour_lit']), tuple(self.tile_gfx[tile_name]['colour_dim']))
+        self.graphics[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=Tile(self.tile_gfx[tile_name]['char'], tuple(self.palette[self.tile_gfx[tile_name]['colour_lit']]), tuple(self.palette[self.tile_gfx[tile_name]['colour_dim']]))
         self.path_map.walkable[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['walkable']
         self.path_map.transparent[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['transparent']
         self.destructible[rect.y1:rect.y2+1, rect.x1:rect.x2+1]=self.tile_data[tile_name]['destructible']

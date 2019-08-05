@@ -22,6 +22,8 @@ class Spawner:
             self.entity_data=json.load(data)
         with open('gfx/colours/entities.json', encoding='utf-8') as gfx:
             self.entity_gfx=json.load(gfx)
+        with open('gfx/colours/palette.json') as colours:
+            self.palette=json.load(colours)
         
 
     def check_collision(self, x, y):
@@ -39,7 +41,7 @@ class Spawner:
         if self.check_collision(x, y):
             return {'spawned': False}
         else:
-            entity=Entity(x, y, entity_name, faction, self.entity_gfx['actors'][entity_name]['char'], tuple(self.entity_gfx['actors'][entity_name]['colour']), self.entity_data['actors'][entity_name]['hp_max'], self.entity_data['actors'][entity_name]['attack'], self.entity_data['actors'][entity_name]['shield'], self.entity_data['actors'][entity_name]['alert_threshold'], RenderOrder.ACTOR, self.entity_data['actors'][entity_name]['walkable'], Inventory(self.entity_data['actors'][entity_name]['inventory_capacity']), (None if (entity_name=='player') else get_ai(self.entity_data['actors'][entity_name]['ai'])))
+            entity=Entity(x, y, entity_name, faction, self.entity_gfx['actors'][entity_name]['char'], tuple(self.palette[self.entity_gfx['actors'][entity_name]['colour']]), self.entity_data['actors'][entity_name]['hp_max'], self.entity_data['actors'][entity_name]['attack'], self.entity_data['actors'][entity_name]['shield'], self.entity_data['actors'][entity_name]['alert_threshold'], RenderOrder.ACTOR, self.entity_data['actors'][entity_name]['walkable'], Inventory(self.entity_data['actors'][entity_name]['inventory_capacity']), (None if (entity_name=='player') else get_ai(self.entity_data['actors'][entity_name]['ai'])))
             self.entities.append(entity)
             return {'spawned': True}
 

@@ -2,37 +2,37 @@
     "ground_dirt":
     {
         "char": "•",
-        "colour_lit": [138, 111, 48],
-        "colour_dim": [82, 76, 49]
+        "colour_lit": "brown",
+        "colour_dim": "dark_brown"
     },
     "wall_dirt":
     {
         "char": "░",
-        "colour_lit": [138, 111, 48],
-        "colour_dim": [82, 76, 49]
+        "colour_lit": "brown",
+        "colour_dim": "dark_brown"
     },
     "ground_grass":
     {
         "char": ".",
-        "colour_lit": [84, 143, 43],
-        "colour_dim": [49, 59, 51]
+        "colour_lit": "green",
+        "colour_dim": "dark_green"
     },
     "wall_tree":
     {
         "char": "♣",
-        "colour_lit": [53, 87, 42],
-        "colour_dim": [49, 59, 51]
+        "colour_lit": "dark_green",
+        "colour_dim": "darker_green"
     },
     "wall_tent":
     {
         "char": "#",
-        "colour_lit": [143, 151, 74],
-        "colour_dim": [82, 76, 49]
+        "colour_lit": "olive",
+        "colour_dim": "dark_green"
     },
     "wall_tent_window":
     {
         "char": "=",
-        "colour_lit": [143, 151, 74],
-        "colour_dim": [82, 76, 49]
+        "colour_lit": "olive",
+        "colour_dim": "dark_green"
     }
 }
