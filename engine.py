@@ -33,8 +33,9 @@ def main():
     spawner=Spawner(map_width, map_height, 0, game_map.path_map)
     spawner.spawn_actor(0, 0, 'player', Factions.ALLY)
     player=spawner.entities[0]
+            # Testing creatures
     spawner.spawn_actor(2, 2, 'snek_test', Factions.ALLY)
-    spawner.spawn_actor(4, 6, 'focker_test', Factions.ALLY)
+    spawner.spawn_actor(2, 0, 'focker_test', Factions.ALLY)
     # Then generate map
     fov_recompute=True
     # message log
@@ -68,7 +69,11 @@ def main():
         if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
-                if dx!=0 or dy!=0:
+                if dx==0 and dy==0:
+                    player_results.extend({'wait': True})
+                    print('I\'m still waiting')
+                    game_state=GameStates.TURN_ALLY
+                else:
                     response=spawner.check_collision(player.x+dx, player.y+dy)
                     target=response.get('collide')
                     if target:
@@ -78,19 +83,15 @@ def main():
                             game_state=GameStates.TURN_ALLY
                         else:
                             #erase_entity(display, player)
-                            player.move(dx, dy, game_map.path_map)
+                            player.move(dx, dy, spawner.block_map)
                             if (not target.walkable) and (not player.walkable): # Non sneks (cheesy circumvention) and if player is in mouse form or sth they'll phase into the enemy
-                                target.move(-dx, -dy, game_map.path_map)
+                                target.move(-dx, -dy, spawner.block_map)
                                 player_results.extend({'swap': target})
                             game_state=GameStates.TURN_ALLY
                     elif (not response.get('blocked')) and (not response.get('outofbounds')):
-                        player.move(dx, dy, game_map.path_map)
+                        player.move(dx, dy, spawner.block_map)
                         fov_recompute=True
                         game_state=GameStates.TURN_ALLY
-                else:
-                    player_results.extend({'wait': True})
-                    print('I\'m still waiting')
-                    game_state=GameStates.TURN_ALLY
 
             elif pickup: # Should implement a pickup list like POWDER
                 for entity in spawner.entities:

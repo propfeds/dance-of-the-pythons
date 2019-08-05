@@ -34,8 +34,8 @@ class Entity:
         if self.environment:
             self.environment.owner=self
 
-    def move(self, dx, dy, path_map):
-        path_map.walkable[self.y, self.x]=True
+    def move(self, dx, dy, block_map):
+        block_map[self.y, self.x]-=(1-self.walkable)
         self.x+=dx
         self.y+=dy
-        path_map.walkable[self.y, self.x]=self.walkable
+        block_map[self.y, self.x]+=(1-self.walkable)
