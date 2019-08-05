@@ -3,36 +3,36 @@
     {
         "char": "•",
         "colour_lit": [138, 111, 48],
-        "colour_dim": [81, 82, 49]
+        "colour_dim": [82, 76, 49]
     },
     "wall_dirt":
     {
         "char": "░",
         "colour_lit": [138, 111, 48],
-        "colour_dim": [81, 82, 49]
+        "colour_dim": [82, 76, 49]
     },
     "ground_grass":
     {
         "char": ".",
-        "colour_lit": [106, 190, 48],
-        "colour_dim": [50, 60, 57]
+        "colour_lit": [84, 143, 43],
+        "colour_dim": [49, 59, 51]
     },
     "wall_tree":
     {
         "char": "♣",
-        "colour_lit": [75, 105, 47],
-        "colour_dim": [50, 60, 57]
+        "colour_lit": [53, 87, 42],
+        "colour_dim": [49, 59, 51]
     },
     "wall_tent":
     {
         "char": "#",
         "colour_lit": [143, 151, 74],
-        "colour_dim": [81, 82, 49]
+        "colour_dim": [82, 76, 49]
     },
     "wall_tent_window":
     {
         "char": "=",
         "colour_lit": [143, 151, 74],
-        "colour_dim": [81, 82, 49]
+        "colour_dim": [82, 76, 49]
     }
 }
