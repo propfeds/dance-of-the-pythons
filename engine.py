@@ -4,7 +4,7 @@ import json
 from map_objects.game_map import GameMap
 from components.inventory import Inventory
 from entity import Entity
-from renderer import RenderOrder, render_all, clear_all
+from renderer import RenderOrder, render_all, erase_all, erase_entity
 from game_states import GameStates
 from input_handler import handle_event
 from spawner import Spawner, Factions
@@ -34,6 +34,7 @@ def main():
     spawner.spawn_actor(0, 0, 'player', Factions.ALLY)
     player=spawner.entities[0]
     spawner.spawn_actor(2, 2, 'snek_test', Factions.ALLY)
+    spawner.spawn_actor(4, 6, 'focker_test', Factions.ALLY)
     # Then generate map
     fov_recompute=True
     # message log
@@ -53,7 +54,7 @@ def main():
         render_all(root_console, display, spawner.entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
         fov_recompute=False
         tcod.console_flush()
-        clear_all(display, spawner.entities)
+        erase_all(display, spawner.entities)
         # Processing action
         action=handle_event(game_state)
         move=action.get('move')
@@ -67,7 +68,7 @@ def main():
         if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
-                if not (dx==0 and dy==0):
+                if dx!=0 or dy!=0:
                     response=spawner.check_collision(player.x+dx, player.y+dy)
                     target=response.get('collide')
                     if target:
@@ -76,6 +77,7 @@ def main():
                             print('A')  # reemmber to extend results
                             game_state=GameStates.TURN_ALLY
                         else:
+                            #erase_entity(display, player)
                             player.move(dx, dy, game_map.path_map)
                             if (not target.walkable) and (not player.walkable): # Non sneks (cheesy circumvention) and if player is in mouse form or sth they'll phase into the enemy
                                 target.move(-dx, -dy, game_map.path_map)

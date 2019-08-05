@@ -25,6 +25,9 @@ def render_all(root_console, display, entities, player, game_map, fov_recompute,
             display.tiles[["ch", "fg"]][entity.y, entity.x]=ord(entity.char), (*entity.colour, 255)
     display.blit(root_console, 0, 0, 0, 0, terminal_width, terminal_height)
 
-def clear_all(display, entities):
+def erase_all(display, entities):
     for entity in entities:
         display.tiles[["ch"]][entity.y, entity.x]=ord(' ')
+
+def erase_entity(display, entity):
+    display.tiles[["ch"]][entity.y, entity.x]=ord(' ')

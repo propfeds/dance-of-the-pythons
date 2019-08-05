@@ -30,11 +30,11 @@ class Spawner:
         # Colliding with the offworld
         if x<0 or y<0 or x>=self.width or y>=self.height:
             return {'outofbounds': True}
+        for entity in self.entities:
+            if entity.x==x and entity.y==y and (not entity.walkable):
+                return {'collide': entity}
         if not self.path_map.walkable[y, x]:
             return {'blocked': True}
-        for entity in self.entities:
-            if entity.x==x and entity.y==y:
-                return {'collide': entity}
         return {}
 
     def spawn_actor(self, x, y, entity_name, faction):

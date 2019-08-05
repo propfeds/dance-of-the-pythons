@@ -10,6 +10,11 @@
         {
             "char": "s",
             "colour": "bright_green"
+        },
+        "focker_test":
+        {
+            "char": "m",
+            "colour": "skin_white"
         }
     },
     "environment":
