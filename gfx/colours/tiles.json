@@ -27,12 +27,12 @@
     {
         "char": "#",
         "colour_lit": [143, 151, 74],
-        "colour_dim": [82, 75, 36]
+        "colour_dim": [64, 69, 43]
     },
     "wall_tent_window":
     {
         "char": "=",
         "colour_lit": [143, 151, 74],
-        "colour_dim": [82, 75, 36]
+        "colour_dim": [64, 69, 43]
     }
 }
