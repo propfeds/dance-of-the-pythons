@@ -1,0 +1,32 @@
+{
+    "actors":
+    {
+        "player":
+        {
+            "char": "@",
+            "colour": [217, 160, 102]
+        },
+        "snek_test":
+        {
+            "char": "s",
+            "colour": [153, 229, 80]
+        }
+    },
+    "environment":
+    {
+        "smoke_explosion":
+        {
+            "char": "░",
+            "colour": [105, 106, 106],
+            "alpha_max": 128
+        }
+    },
+    "furniture":
+    {
+
+    },
+    "items":
+    {
+        
+    }
+}

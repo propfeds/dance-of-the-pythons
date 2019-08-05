@@ -1,8 +1,0 @@
-{
-    "smoke_explosion":
-    {
-        "char": "░",
-        "colour": [105, 106, 106],
-        "alpha_max": 128
-    }
-}

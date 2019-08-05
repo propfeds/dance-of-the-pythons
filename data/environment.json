@@ -1,7 +1,0 @@
-{
-    "smoke_explosion":
-    {
-        "decay_min": 2,
-        "decay_max": 5
-    }
-}
