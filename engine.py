@@ -64,13 +64,13 @@ def main():
         fullscreen=action.get('fullscreen')
         exit=action.get('exit')
         # Player's Turn
-        player_results=[]
+        results_player=[]
         # Results: Extend if player turn ends and append if doesn't?
         if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
                 if dx==0 and dy==0:
-                    player_results.extend({'wait': True})
+                    results_player.extend({'wait': True})
                     print('I\'m still waiting')
                     game_state=GameStates.TURN_ALLY
                 else:
@@ -83,7 +83,7 @@ def main():
                             game_state=GameStates.TURN_ALLY
                         else:
                             if (not target.walkable) and (not player.walkable): # Non sneks (cheesy circumvention) and if player is in mouse form or sth they'll phase into the enemy
-                                player_results.extend(player.swap(target))
+                                results_player.extend(player.swap(target))
                             else:
                                 player.move(dx, dy, spawner.block_map)
                             fov_recompute=True
@@ -109,7 +109,7 @@ def main():
             if game_state.value>=10:  # Game states >= 10 are menus: inventory, quipment, etc.
                 game_state=prev_game_state
             if game_state.value>=20:  # Game states >= 20 are targetings
-                player_results.append({'targeting_cancelled': True})
+                results_player.append({'targeting_cancelled': True})
             # else brings up main menu
         
         if fullscreen:
@@ -119,13 +119,23 @@ def main():
 
         # Faction turns (handled by an announcer also)
         if game_state==GameStates.TURN_ALLY:
-                game_state=GameStates.TURN_ENEMY
+            for entity in spawner.entities:
+                if entity.faction==Factions.ALLY:
+                    results_ally=entity.take_turn()
+            game_state=GameStates.TURN_ENEMY
         
         if game_state==GameStates.TURN_ENEMY:
-                game_state=GameStates.TURN_NEUTRAL
+            for entity in spawner.entities:
+                if entity.faction==Factions.ENEMY:
+                    results_enemy=entity.take_turn()
+            game_state=GameStates.TURN_NEUTRAL
         
         if game_state==GameStates.TURN_NEUTRAL:
-                game_state=GameStates.TURN_PLAYER
+            for entity in spawner.entities:
+                if entity.faction==Factions.NEUTRAL:
+                    if entity.ai:
+                        resutls_neutral=entity.take_turn()
+            game_state=GameStates.TURN_PLAYER
 
 
 if __name__=='__main__':
