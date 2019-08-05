@@ -24,7 +24,9 @@ def main():
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
     root_console=tcod.console_init_root(terminal_width, terminal_height, 'Python: Yuwanda\'s Awakening', False, tcod.RENDERER_SDL2, 'C', False)
     display=tcod.console.Console(terminal_width, terminal_height, 'C')
-    display.bg[:]=(8, 19, 4)
+    with open('gfx/colours/palette.json') as colours:
+        palette=json.load(colours)
+    display.bg[:]=palette['terminal_green']
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     spawner=Spawner(map_width, map_height, 0, game_map.path_map)
