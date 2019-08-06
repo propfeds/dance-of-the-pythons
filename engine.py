@@ -10,6 +10,8 @@ from input_handler import handle_event
 from spawner import Spawner, Factions
 from ai import NeutralAggro
 
+from map_objects.generator import generate_test_area
+
 def main():
     # Importing data from config
     with open('data/config.json') as cfg:
@@ -31,11 +33,10 @@ def main():
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     spawner=Spawner(map_width, map_height, 0, game_map.path_map)
+            # Testing creatures
     spawner.spawn_actor(0, 0, 'player', Factions.ALLY)
     player=spawner.entities[0]
-            # Testing creatures
-    spawner.spawn_actor(2, 2, 'snek_test', Factions.ALLY)
-    spawner.spawn_actor(2, 0, 'focker_test', Factions.ALLY)
+    generate_test_area(game_map, spawner)
     # Then generate map
     fov_recompute=True
     # message log
