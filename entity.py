@@ -1,6 +1,8 @@
 import tcod
 from renderer import RenderOrder
 
+#pylint: disable=no-member
+
 class Entity:
     def __init__(self, x, y, name, faction, char, colour, hp_max, attack, shield, alert_threshold, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, ai=None, item=None, environment=None):
         self.x=x
@@ -36,20 +38,23 @@ class Entity:
 
     def take_damage(self, damage_amount, piercing, lethal):
         damage_remaining=damage_amount
-        # bools are for announcements
-        shielded=False
+        # bool is for announcements
+        damage_shielded=0
         death=False
         if not piercing:
             if damage_remaining>self.shield:
+                damage_shielded=self.shield
                 damage_remaining-=self.shield
                 self.shield=0
             else:
+                damage_shielded=damage_remaining
                 self.shield-=damage_remaining
                 damage_remaining=0
         if lethal:
             if damage_remaining>self.hp:
                 damage_remaining-=self.hp
                 self.hp=0
+                death=True
             else:
                 self.hp-=damage_remaining
                 damage_remaining=0
@@ -60,8 +65,14 @@ class Entity:
             else:
                 self.hp-=damage_remaining
                 damage_remaining=0
-        damage_taken=damage_amount-damage_remaining
-        # EXTEND RESULTS
+        # returning damage taken
+        results=[]
+        results.append({'take_damage': damage_amount-damage_remaining})
+        if damage_shielded>0:
+            results.extend({'shielded': damage_shielded})
+        if death:
+            results.append({'dead': self.owner})
+        return results
 
     def move(self, dx, dy, block_map):
         if not self.walkable:
