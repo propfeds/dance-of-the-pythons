@@ -20,8 +20,8 @@
     "wall_tree":
     {
         "char": "♣",
-        "colour_lit": "dark_green",
-        "colour_dim": "darker_green"
+        "colour_lit": "green",
+        "colour_dim": "dark_green"
     },
     "wall_tent":
     {
