@@ -4,7 +4,7 @@ import json
 from map_objects.game_map import GameMap
 from components.inventory import Inventory
 from entity import Entity
-from renderer import RenderOrder, render_all, erase_all, erase_entity
+from renderer import RenderOrder, render_all, erase_entities
 from game_states import GameStates
 from input_handler import handle_event
 from spawner import Spawner, Factions
@@ -24,19 +24,18 @@ def main():
     fov_light_walls=data['fov_light_walls']
     fov_radius=data['fov_radius']
     # Init root console
-    tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
-    root_console=tcod.console_init_root(terminal_width, terminal_height, 'Python: Yuwanda\'s Awakening', False, tcod.RENDERER_SDL2, 'C', False)
-    display=tcod.console.Console(terminal_width, terminal_height, 'C')
+    tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro_style.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
+    console_root=tcod.console_init_root(terminal_width, terminal_height, 'Python: Yuwanda\'s Awakening', False, tcod.RENDERER_SDL2, 'C', False)
+    console_display=tcod.console.Console(terminal_width, terminal_height, 'C')
     with open('gfx/colours/palette.json') as colours:
         palette=json.load(colours)
-    display.bg[:]=palette['terminal_green']
+    console_display.bg[:]=palette['terminal_green']
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     spawner=Spawner(map_width, map_height, 0, game_map.path_map)
             # Testing creatures
-    spawner.spawn_actor(0, 0, 'player', Factions.ALLY)
-    player=spawner.entities[0]
     generate_test_area(game_map, spawner)
+    player=spawner.entities[0]
     # Then generate map
     fov_recompute=True
     # message log
@@ -45,7 +44,7 @@ def main():
     #targeting_item=None
     # Rendering for the first time
     game_map.recompute_fov(player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
-    render_all(root_console, display, spawner.entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
+    render_all(console_root, console_display, spawner.entities, game_map, fov_recompute)
     fov_recompute=False
     tcod.console_flush()
     # Game loop
@@ -53,10 +52,10 @@ def main():
         # Render
         if fov_recompute:
             game_map.recompute_fov(player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
-        render_all(root_console, display, spawner.entities, player, game_map, fov_recompute, terminal_width, terminal_height, game_state)
+        render_all(console_root, console_display, spawner.entities, game_map, fov_recompute)
         fov_recompute=False
         tcod.console_flush()
-        erase_all(display, spawner.entities)
+        erase_entities(console_display, spawner.entities, game_map)
         # Processing action
         action=handle_event(game_state)
         move=action.get('move')
@@ -122,7 +121,7 @@ def main():
         if game_state==GameStates.TURN_ALLY:
             for entity in spawner.entities:
                 if entity.faction==Factions.ALLY and entity!=player:
-                    results_ally=entity.ai.take_turn()
+                    results_ally=entity.ai.take_turn(spawner, game_map.path_map)
             game_state=GameStates.TURN_ENEMY
         
         if game_state==GameStates.TURN_ENEMY:

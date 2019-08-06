@@ -12,6 +12,6 @@ def generate_test_area(game_map, spawner):
     game_map.fill_rect(Rectangle(5, game_map.height-8, 1, 1), 'ground_dirt')
     game_map.fill_rect(Rectangle(4, game_map.height-7, 3, 3), 'ground_grass')
     y_dest=game_map.cave_x(13, 0, game_map.width-30, 'wall_dirt', 15, 15, 1, 1, 2)
-    
+    spawner.spawn_actor(0, 0, 'player', Factions.ALLY)
     spawner.spawn_actor(2, 2, 'snek_test', Factions.ALLY)
     spawner.spawn_actor(2, 0, 'focker_test', Factions.ALLY)
