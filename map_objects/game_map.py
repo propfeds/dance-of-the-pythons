@@ -13,7 +13,7 @@ class GameMap:
         self.height=height
         # The void
         self.path_map=tcod.map.Map(width, height, 'C')
-        self.graphics=numpy.full((height, width), Tile(' ', (0, 0, 0), (0, 0, 0)))
+        self.graphics=numpy.full((height, width), None)
         self.destructible=numpy.full((height, width), False)
         self.explored=numpy.full((height, width), False)
         # Importing tiles data (please only load at level 1)
