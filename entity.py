@@ -34,6 +34,35 @@ class Entity:
         if self.environment:
             self.environment.owner=self
 
+    def take_damage(self, damage_amount, piercing, lethal):
+        damage_remaining=damage_amount
+        # bools are for announcements
+        shielded=False
+        death=False
+        if not piercing:
+            if damage_remaining>self.shield:
+                damage_remaining-=self.shield
+                self.shield=0
+            else:
+                self.shield-=damage_remaining
+                damage_remaining=0
+        if lethal:
+            if damage_remaining>self.hp:
+                damage_remaining-=self.hp
+                self.hp=0
+            else:
+                self.hp-=damage_remaining
+                damage_remaining=0
+        else:
+            if damage_remaining>self.hp-1:
+                damage_remaining-=(self.hp-1)
+                self.hp=1
+            else:
+                self.hp-=damage_remaining
+                damage_remaining=0
+        damage_taken=damage_amount-damage_remaining
+        # EXTEND RESULTS
+
     def move(self, dx, dy, block_map):
         if not self.walkable:
             block_map[self.y, self.x]=False
