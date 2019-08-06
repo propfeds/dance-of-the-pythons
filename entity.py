@@ -67,11 +67,17 @@ class Entity:
                 damage_remaining=0
         # returning damage taken
         results=[]
-        results.append({'take_damage': damage_amount-damage_remaining})
-        if damage_shielded>0:
-            results.extend({'shielded': damage_shielded})
+        results.append({'damage_taken': damage_amount-damage_remaining})
+        results.extend({'shielded': damage_shielded})
         if death:
             results.append({'dead': self.owner})
+        return results
+
+    def deal_damage(self, target, damage_amount, piercing, lethal):
+        results=[]
+        results.append({'attacker': self.name})
+        results.extend({'defender': target})
+        results.extend(target.take_damage(damage_amount, piercing, lethal))
         return results
 
     def move(self, dx, dy, block_map):
