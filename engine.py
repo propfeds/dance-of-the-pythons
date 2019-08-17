@@ -24,7 +24,7 @@ def main():
     fov_light_walls=data['fov_light_walls']
     fov_radius=data['fov_radius']
     # Init root console
-    tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro_style.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
+    tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
     console_root=tcod.console_init_root(terminal_width, terminal_height, 'Python: Yuwanda\'s Awakening', False, tcod.RENDERER_SDL2, 'C', False)
     console_display=tcod.console.Console(terminal_width, terminal_height, 'C')
     with open('gfx/colours/palette.json') as colours:

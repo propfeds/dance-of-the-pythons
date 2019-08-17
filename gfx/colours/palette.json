@@ -2,13 +2,12 @@
     "terminal_green": [8, 19, 4],
     "brown": [138, 111, 48],
     "dark_brown": [82, 75, 36],
-    "olive": [104, 143, 54],
+    "olive": [114, 134, 54],
     "bright_green": [153, 229, 80],
     "green": [106, 190, 48],
     "dark_green": [53, 87, 42],
     "darker_green": [49, 59, 51],
     "grey_orange": [143, 136, 129],
     "skin_brown": [143, 86, 59],
-    "skin_tan": [217, 160, 102],
-    "skin_white": [238, 195, 154]
+    "skin_tan": [217, 160, 102]
 }
