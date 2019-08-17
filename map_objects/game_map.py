@@ -58,7 +58,7 @@ class GameMap:
                 if wind_roll<wind:
                     x_current=max(0, x_current+randint(-swole, swole))
                     x_current=min(x_current, self.width-width_min)
-            self.fill_rect(Rectangle(x_current, y, width_current, 1), tile_name)
+            self.fill_rect(Rectangle(x_current, y, x_current+width_current-1, y), tile_name)
             # This is where I could add events (a chance of a tent appearing on a branch from the path, or some fixture like torches).
         # Returns x_current because it's the end of the road (level transitions/'stairs')
         return x_current
@@ -80,7 +80,7 @@ class GameMap:
                 if wind_roll<wind:
                     y_current=max(0, y_current+randint(-swole, swole))
                     y_current=min(y_current, self.height-height_min)
-            self.fill_rect(Rectangle(x, y_current, 1, height_current), tile_name)
+            self.fill_rect(Rectangle(x, y_current, x, y_current+height_current-1), tile_name)
             # This is where I could add events (a chance of a tent appearing on a branch from the path, or some fixture like torches).
         # Returns x_current because it's the end of the road (level transitions/'stairs')
         return y_current
