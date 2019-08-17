@@ -1,7 +1,7 @@
 {
     "ground_dirt":
     {
-        "char": "•",
+        "char": ".",
         "colour_lit": "brown",
         "colour_dim": "dark_brown"
     },
