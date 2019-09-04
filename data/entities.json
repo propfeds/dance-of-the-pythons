@@ -18,17 +18,23 @@
             "alert_threshold": 10,
             "walkable": true,
             "inventory_capacity": 0,
-            "ai": "neutral"
+            "ai":
+            {
+                "name": "neutral"
+            }
         },
         "focker_test":
         {
             "hp_max": 10,
-            "attack": 0,
+            "attack": 1,
             "shield": 0,
             "alert_threshold": 10,
             "walkable": false,
             "inventory_capacity": 6,
-            "ai": "guard"
+            "ai":
+            {
+                "name": "guard"
+            }
         }
     },
     "environment":

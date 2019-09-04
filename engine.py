@@ -8,7 +8,7 @@ from renderer import RenderOrder, render_all, erase_entities
 from game_states import GameStates
 from input_handler import handle_event
 from spawner import Spawner, Factions
-from ai import NeutralAggro
+from components.ai import NeutralAggro
 
 from map_objects.generator import generate_test_area
 
@@ -32,7 +32,7 @@ def main():
     console_display.bg[:]=palette['terminal_green']
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
-    spawner=Spawner(map_width, map_height, 0, game_map.path_map)
+    spawner=Spawner(map_width, map_height, 0)
             # Testing creatures
     generate_test_area(game_map, spawner)
     player=spawner.entities[0]
@@ -74,7 +74,7 @@ def main():
                     print('I\'m still waiting')
                     game_state=GameStates.TURN_ALLY
                 else:
-                    response=spawner.check_collision(player.x+dx, player.y+dy)
+                    response=spawner.check_collision(player.x+dx, player.y+dy, game_map.path_map)
                     target=response.get('collide')
                     if target:
                         # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)

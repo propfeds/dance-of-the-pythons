@@ -1,10 +1,12 @@
 import tcod
+import tcod.path
 from renderer import RenderOrder
+from numpy import bitwise_or
 
 #pylint: disable=no-member
 
 class Entity:
-    def __init__(self, x, y, name, faction, char, colour, hp_max, attack, shield, alert_threshold, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, ai=None, item=None, environment=None):
+    def __init__(self, x, y, name, faction, char, colour, hp_max, attack, shield, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, ai=None, item=None, environment=None):
         self.x=x
         self.y=y
         self.name=name
@@ -16,8 +18,6 @@ class Entity:
         self.hp=hp_max
         self.attack=attack
         self.shield=shield
-        self.alert_threshold=alert_threshold
-        self.alert=0
 
         self.render_order=render_order
         # Is pathable and not the ability to walk
@@ -96,3 +96,12 @@ class Entity:
         target.x=x
         target.y=y
         return {'swap': target}
+    
+    def get_astar_path(self, path_map, block_map):
+        return tcod.path.AStar(bitwise_or(path_map, block_map))
+    
+    def distance(self, target_x, target_y):
+        return max(abs(target_x-self.x), abs(target_y-self.y))
+
+    def handle_move(self, dx, dy, spawner, game_map):
+        print('lol')

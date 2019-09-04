@@ -1,6 +1,6 @@
 import json
 import numpy
-from ai import get_ai
+from components.ai import get_ai
 from enum import Enum
 from renderer import RenderOrder
 from entity import Entity
@@ -12,12 +12,11 @@ class Factions(Enum):
     ENEMY=2
 
 class Spawner:
-    def __init__(self, width, height, level, path_map):
+    def __init__(self, width, height, level):
         self.width=width
         self.height=height
         self.level=level
         # Path map is terrain blockade, block map is entity blockade
-        self.path_map=path_map
         self.block_map=numpy.full((height, width), False)
         self.entities=[]
         # Loading data
@@ -29,11 +28,11 @@ class Spawner:
             self.palette=json.load(colours)
         
 
-    def check_collision(self, x, y):
+    def check_collision(self, x, y, path_map):
         # Colliding with the offworld
         if x<0 or y<0 or x>=self.width or y>=self.height:
             return {'outofbounds': True}
-        if not self.path_map.walkable[y, x]:
+        if not path_map.walkable[y, x]:
             return {'blocked': True}
         if self.block_map[y, x]:
             for entity in self.entities:
@@ -41,8 +40,8 @@ class Spawner:
                     return {'collide': entity}
         return {}
 
-    def spawn_actor(self, x, y, entity_name, faction):
-        if self.check_collision(x, y):
+    def spawn_actor(self, x, y, entity_name, faction, path_map):
+        if self.check_collision(x, y, path_map):
             return {'spawned': False}
         else:
             # If short you can walk through ;)
@@ -52,24 +51,24 @@ class Spawner:
             self.block_map[y, x]=(not short)
             return {'spawned': True}
 
-    def spawn_furniture(self, x, y, entity_name):
-        if self.check_collision(x, y):
+    def spawn_furniture(self, x, y, entity_name, path_map):
+        if self.check_collision(x, y, path_map):
             return {'spawned': False}
         else:
             self.entities.append('fuckoff')
             return {'spawned': True}
 
-    def spawn_item(self, x, y, entity_name, item_component):
-        # Items can spawn beneath actors
-        if not self.path_map.walkable[y, x]:
+    def spawn_item(self, x, y, entity_name, item_component, path_map):
+        # Items can spawn beneath actors (don't need to check entity collision)
+        if not path_map.walkable[y, x]:
             return {'spawned': False}
         else:
             self.entities.append('fuckoff')
             return {'spawned': True}
 
-    def spawn_environment(self, x, y, environment_component):
-        # Environment entities can spawn beneath actors
-        if not self.path_map.walkable[y, x]:
+    def spawn_environment(self, x, y, environment_component, path_map):
+        # Environment entities like smoke can spawn beneath actors (don't need to check entity collision)
+        if not path_map.walkable[y, x]:
             return {'spawned': False}
         else:
             self.entities.append('fuckoff')
