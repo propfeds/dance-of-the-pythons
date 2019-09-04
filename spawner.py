@@ -46,7 +46,16 @@ class Spawner:
         else:
             # If short you can walk through ;)
             short=self.entity_data['actors'][entity_name]['walkable']
-            entity=Entity(x, y, entity_name, faction, self.entity_gfx['actors'][entity_name]['char'], tuple(self.palette[self.entity_gfx['actors'][entity_name]['colour']]), self.entity_data['actors'][entity_name]['hp_max'], self.entity_data['actors'][entity_name]['attack'], self.entity_data['actors'][entity_name]['shield'], self.entity_data['actors'][entity_name]['alert_threshold'], (RenderOrder.ACTOR_SHORT if short else RenderOrder.ACTOR), short, Inventory(self.entity_data['actors'][entity_name]['inventory_capacity']), (None if (entity_name=='player') else get_ai(self.entity_data['actors'][entity_name]['ai'])))
+            char=self.entity_gfx['actors'][entity_name]['char']
+            colour=tuple(self.palette[self.entity_gfx['actors'][entity_name]['colour']])
+            hp_max=self.entity_data['actors'][entity_name]['hp_max']
+            attack=self.entity_data['actors'][entity_name]['attack']
+            shield=self.entity_data['actors'][entity_name]['shield']
+            alert_threshold=self.entity_data['actors'][entity_name]['alert_threshold']
+            inventory_component=Inventory(self.entity_data['actors'][entity_name]['inventory_capacity'])
+            ai_component=get_ai(self.entity_data['actors'][entity_name]['ai'])
+            
+            entity=Entity(x, y, entity_name, faction, char, colour, hp_max, attack, shield, alert_threshold, (RenderOrder.ACTOR_SHORT if short else RenderOrder.ACTOR), short, inventory_component, (None if (entity_name=='player') else ai_component))
             self.entities.append(entity)
             self.block_map[y, x]=(not short)
             return {'spawned': True}

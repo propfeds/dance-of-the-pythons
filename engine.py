@@ -8,8 +8,9 @@ from renderer import RenderOrder, render_all, erase_entities
 from game_states import GameStates
 from input_handler import handle_event
 from spawner import Spawner, Factions
-from components.ai import NeutralAggro
 
+
+from components.ai import NeutralAggro
 from map_objects.generator import generate_test_area
 
 def main():
@@ -25,7 +26,7 @@ def main():
     fov_radius=data['fov_radius']
     # Init root console
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
-    console_root=tcod.console_init_root(terminal_width, terminal_height, 'Python: Yuwanda\'s Awakening', False, tcod.RENDERER_SDL2, 'C', False)
+    console_root=tcod.console_init_root(terminal_width, terminal_height, 'Python Game Lol', False, tcod.RENDERER_SDL2, 'C', False)
     console_display=tcod.console.Console(terminal_width, terminal_height, 'C')
     with open('gfx/colours/palette.json') as colours:
         palette=json.load(colours)
