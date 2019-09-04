@@ -2,6 +2,7 @@ import tcod
 import tcod.path
 from renderer import RenderOrder
 from numpy import bitwise_or
+from spawner import Factions
 
 #pylint: disable=no-member
 
@@ -87,6 +88,7 @@ class Entity:
         self.y+=dy
         if not self.walkable:
             block_map[self.y, self.x]=(not self.walkable)
+        return {'move': (dx, dy)}
 
     def swap(self, target):
         x=self.x
@@ -103,5 +105,33 @@ class Entity:
     def distance(self, target_x, target_y):
         return max(abs(target_x-self.x), abs(target_y-self.y))
 
-    def handle_move(self, dx, dy, spawner, game_map):
-        print('lol')
+    def bump(self, target):
+        return self.deal_damage(target, self.attack, False, True)
+
+    # swappable: True for player, and generally True for leaders/massive ones
+    def handle_move(self, dx, dy, spawner, game_map, swappable):
+        results=[]
+        if dx==0 and dy==0:
+            results.extend({'wait': True})
+        else:
+            response=spawner.check_collision(self.x+dx, self.y+dy, game_map.path_map)
+            target=response.get('collide')
+            if target:
+                # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)
+                if target.faction==Factions.NEUTRAL:
+                    # Cases for neutral tame and aggro
+                    print('PETA')
+                elif target.faction!=self.faction:
+                    results.extend(self.bump(target))
+                else:
+                    # ALLIES: if player is in mouse form or sth they'll phase into the ally else they swap
+                    if (not self.walkable) and (not target.walkable) and swappable:
+                        results.extend(self.swap(target))
+                    else:
+                        results.extend(self.move(dx, dy, spawner.block_map))
+            elif (not response.get('blocked')) and (not response.get('outofbounds')):
+                results.extend(self.move(dx, dy, spawner.block_map))
+            # Else player is blocked! And fucntion returns nothing
+        return results
+        # Fov will be recomputed if you swap or move
+        # If function returns nothing (entity is blocked) then don't consume turn (fov_recompute and game_state change happens together on the player)

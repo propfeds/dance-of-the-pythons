@@ -70,29 +70,11 @@ def main():
         if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
-                if dx==0 and dy==0:
-                    results_player.extend({'wait': True})
-                    print('I\'m still waiting')
+                results_movement=player.handle_move(player, dx, dy, spawner, game_map, swappable=True)
+                if results_movement:
+                    results_player.extend(results_movement)
+                    fov_recompute=True
                     game_state=GameStates.TURN_ALLY
-                else:
-                    response=spawner.check_collision(player.x+dx, player.y+dy, game_map.path_map)
-                    target=response.get('collide')
-                    if target:
-                        # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)
-                        if target.faction==Factions.ENEMY or target.ai==NeutralAggro():
-                            print('A')  # reemmber to extend results
-                            game_state=GameStates.TURN_ALLY
-                        else:
-                            if (not target.walkable) and (not player.walkable): # Non sneks (cheesy circumvention) and if player is in mouse form or sth they'll phase into the enemy
-                                results_player.extend(player.swap(target))
-                            else:
-                                player.move(dx, dy, spawner.block_map)
-                            fov_recompute=True
-                            game_state=GameStates.TURN_ALLY
-                    elif (not response.get('blocked')) and (not response.get('outofbounds')):
-                        player.move(dx, dy, spawner.block_map)
-                        fov_recompute=True
-                        game_state=GameStates.TURN_ALLY
 
             elif pickup: # Should implement a pickup list like POWDER
                 for entity in spawner.entities:
