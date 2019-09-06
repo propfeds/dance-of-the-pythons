@@ -109,12 +109,12 @@ class Entity:
         return self.deal_damage(target, self.attack, False, True)
 
     # swappable: True for player, and generally True for leaders/massive ones
-    def handle_move(self, dx, dy, spawner, game_map, swappable):
+    def handle_move(self, dx, dy, spawner, path_map, swappable):
         results=[]
         if dx==0 and dy==0:
             results.extend({'wait': True})
         else:
-            response=spawner.check_collision(self.x+dx, self.y+dy, game_map.path_map)
+            response=spawner.check_collision(self.x+dx, self.y+dy, path_map)
             target=response.get('collide')
             if target:
                 # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)

@@ -1,15 +1,15 @@
 from random import randint
 from math import ceil
-from spawner import Factions
 #pylint: disable=no-member
 
 # Basic factory
 def get_ai(ai):
-    if ai.name=='guard':         return Guard(None)          # only enemy
-    #if string=='reptile_body':  return ReptileBody()
-    if ai.name=='neutral_aggro': return NeutralAggro()   # snakes bears
-    if ai.name=='neutral':       return Neutral()        # sometimes dogs, turns into aggro when provoked
-    #if string=='neutral_tame':  return NeutralTame()    # kripto the bunny
+    if ai.name=='none':         return None
+    if ai.name=='guard':        return Guard(None)
+    #if string=='reptile_body': return ReptileBody()
+    if ai.name=='neutral_aggro':return NeutralAggro()   # snakes bears
+    if ai.name=='neutral':      return Neutral()        # sometimes dogs, turns into aggro when provoked
+    #if string=='neutral_tame': return NeutralTame()    # kripto the bunny
     
     return None
 
@@ -35,20 +35,13 @@ class Guard:
 
     def take_turn(self, spawner, path_map):
         results=[]
-        # Try brute move, then try a*, if not recalculate a* and try again
+        # If target entity is in fov then chase, if not just stand still for now until something comes into range
+        # Brute move: should favour diagonals
         dist=self.owner.distance(self.owner, self.target_x, self.target_y)
         dx=int(ceil(abs(self.target_x-self.owner.x)/dist))
         dy=int(ceil(abs(self.target_y-self.owner.y)/dist))
-
-        # RESULTS EXTEND
-        response=spawner.check_collision(self.owner.x+dx, self.owner.y+dy, path_map)
-        target=response.get('collide')
-        if target:
-            if target.faction==self.owner.faction or target.faction==Factions.NEUTRAL:
-                # try a* if not recalc
-                print('Geddout my way binch! Cursed thee {0}!'.format(target.name))
-            else:
-                print('KILL')   #RESULTS EXTEND
-        elif (not response.get('blocked')) and (not response.get('outofbounds')):
-            self.owner.move(dx, dy, spawner.block_map)
+        results_movement=self.owner.handle_move(dx, dy, spawner, path_map, swappable=False)
+        if results_movement==[]:
+            print('Try A*, if not ten recalc A* and try again')
+        results.extend(results_movement)
         return results

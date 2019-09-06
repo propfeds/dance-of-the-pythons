@@ -8,7 +8,11 @@
             "shield": 300,
             "alert_threshold": 15,
             "walkable": false,
-            "inventory_capacity": 26
+            "inventory_capacity": 26,
+            "ai":
+            {
+                "name": "none"
+            }
         },
         "snek_test":
         {

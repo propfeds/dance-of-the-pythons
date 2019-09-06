@@ -55,7 +55,7 @@ class Spawner:
             inventory_component=Inventory(self.entity_data['actors'][entity_name]['inventory_capacity'])
             ai_component=get_ai(self.entity_data['actors'][entity_name]['ai'])
             
-            entity=Entity(x, y, entity_name, faction, char, colour, hp_max, attack, shield, alert_threshold, (RenderOrder.ACTOR_SHORT if short else RenderOrder.ACTOR), short, inventory_component, (None if (entity_name=='player') else ai_component))
+            entity=Entity(x, y, entity_name, faction, char, colour, hp_max, attack, shield, alert_threshold, (RenderOrder.ACTOR_SHORT if short else RenderOrder.ACTOR), short, inventory_component, ai_component)
             self.entities.append(entity)
             self.block_map[y, x]=(not short)
             return {'spawned': True}

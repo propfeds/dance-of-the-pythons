@@ -66,11 +66,11 @@ def main():
         exit=action.get('exit')
         # Player's Turn
         results_player=[]
-        # Results: Extend if player turn ends and append if doesn't?
+        # Results: Extend if player turn ends and append if doesn't? Tcod tutorial is confusing.
         if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
-                results_movement=player.handle_move(player, dx, dy, spawner, game_map, swappable=True)
+                results_movement=player.handle_move(dx, dy, spawner, game_map.path_map, swappable=True)
                 if results_movement:
                     results_player.extend(results_movement)
                     fov_recompute=True
