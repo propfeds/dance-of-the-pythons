@@ -1,6 +1,6 @@
 import tcod
 import tcod.event
-from game_states import GameStates
+from enums import GameStates
 
 def handle_event(game_state):
     for event in tcod.event.get():

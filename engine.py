@@ -3,11 +3,10 @@ import tcod.event
 import json
 from map_objects.game_map import GameMap
 from components.inventory import Inventory
-from entity import Entity
-from renderer import RenderOrder, render_all, erase_entities
-from game_states import GameStates
+from renderer import render_all, erase_entities
 from input_handler import handle_event
-from spawner import Spawner, Factions
+from spawner import Spawner
+from enums import Factions, GameStates, RenderOrder
 
 
 from components.ai import NeutralAggro

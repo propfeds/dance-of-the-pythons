@@ -1,8 +1,7 @@
 import tcod
 import tcod.path
-from renderer import RenderOrder
 from numpy import bitwise_or
-from spawner import Factions
+from enums import Factions, RenderOrder
 
 #pylint: disable=no-member
 

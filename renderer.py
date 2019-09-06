@@ -1,13 +1,5 @@
 import tcod
-from enum import Enum
-
-class RenderOrder(Enum):
-    CORPSE=-1
-    FURNITURE=0
-    ITEM=1
-    ACTOR_SHORT=2   # Mice
-    ENVIRONMENT=3   # explosion smoke, particles
-    ACTOR=4
+from enums import RenderOrder
 
 def render_all(console_root, console_display, entities, game_map, fov_recompute):
     # [y, x] arrays remember

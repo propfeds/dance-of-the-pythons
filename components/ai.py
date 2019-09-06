@@ -5,7 +5,7 @@ from math import ceil
 # Basic factory
 def get_ai(ai):
     if ai.name=='none':         return None
-    if ai.name=='guard':        return Guard(None)
+    if ai.name=='guard':        return Guard()
     #if string=='reptile_body': return ReptileBody()
     if ai.name=='neutral_aggro':return NeutralAggro()   # snakes bears
     if ai.name=='neutral':      return Neutral()        # sometimes dogs, turns into aggro when provoked

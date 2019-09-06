@@ -1,15 +1,10 @@
 import json
 import numpy
 from components.ai import get_ai
-from enum import Enum
-from renderer import RenderOrder
+from enums import RenderOrder
 from entity import Entity
 from components.inventory import Inventory
 
-class Factions(Enum):
-    NEUTRAL=0
-    ALLY=1
-    ENEMY=2
 
 class Spawner:
     def __init__(self, width, height, level):

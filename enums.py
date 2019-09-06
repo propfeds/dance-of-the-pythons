@@ -13,3 +13,16 @@ class GameStates(Enum):
 
     MENU_TARGET_POINT=20  # The cursed thing, but now with keyboard controls instead
     MENU_TARGET_DIR=21    # Nine directions which if self-target (NumPad5 or s) fires to ground
+
+class Factions(Enum):
+    NEUTRAL=0
+    ALLY=1
+    ENEMY=2
+
+class RenderOrder(Enum):
+    CORPSE=-1
+    FURNITURE=0
+    ITEM=1
+    ACTOR_SHORT=2   # Mice
+    ENVIRONMENT=3   # explosion smoke, particles
+    ACTOR=4
