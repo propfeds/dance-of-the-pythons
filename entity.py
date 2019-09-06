@@ -1,10 +1,12 @@
 import tcod
-from renderer import RenderOrder
+import tcod.path
+from numpy import bitwise_or
+from enums import Factions, RenderOrder
 
 #pylint: disable=no-member
 
 class Entity:
-    def __init__(self, x, y, name, faction, char, colour, hp_max, attack, shield, alert_threshold, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, ai=None, item=None, environment=None):
+    def __init__(self, x, y, name, faction, char, colour, hp_max, attack, shield, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, ai=None, item=None, environment=None):
         self.x=x
         self.y=y
         self.name=name
@@ -16,8 +18,6 @@ class Entity:
         self.hp=hp_max
         self.attack=attack
         self.shield=shield
-        self.alert_threshold=alert_threshold
-        self.alert=0
 
         self.render_order=render_order
         # Is pathable and not the ability to walk
@@ -70,7 +70,7 @@ class Entity:
         results.append({'damage_taken': damage_amount-damage_remaining})
         results.extend({'shielded': damage_shielded})
         if death:
-            results.append({'dead': self.owner})
+            results.append({'dead': self})
         return results
 
     def deal_damage(self, target, damage_amount, piercing, lethal):
@@ -87,6 +87,7 @@ class Entity:
         self.y+=dy
         if not self.walkable:
             block_map[self.y, self.x]=(not self.walkable)
+        return {'move': (dx, dy)}
 
     def swap(self, target):
         x=self.x
@@ -96,3 +97,40 @@ class Entity:
         target.x=x
         target.y=y
         return {'swap': target}
+    
+    def get_astar_path(self, path_map, block_map):
+        return tcod.path.AStar(bitwise_or(path_map, block_map))
+    
+    def distance(self, target_x, target_y):
+        return max(abs(target_x-self.x), abs(target_y-self.y))
+
+    def bump(self, target):
+        return self.deal_damage(target, self.attack, False, True)
+
+    # swappable: True for player, and generally True for leaders/massive ones
+    def handle_move(self, dx, dy, spawner, path_map, swappable):
+        results=[]
+        if dx==0 and dy==0:
+            results.extend({'wait': True})
+        else:
+            response=spawner.check_collision(self.x+dx, self.y+dy, path_map)
+            target=response.get('collide')
+            if target:
+                # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)
+                if target.faction==Factions.NEUTRAL:
+                    # Cases for neutral tame and aggro
+                    print('PETA')
+                elif target.faction!=self.faction:
+                    results.extend(self.bump(target))
+                else:
+                    # ALLIES: if player is in mouse form or sth they'll phase into the ally else they swap
+                    if (not self.walkable) and (not target.walkable) and swappable:
+                        results.extend(self.swap(target))
+                    else:
+                        results.extend(self.move(dx, dy, spawner.block_map))
+            elif (not response.get('blocked')) and (not response.get('outofbounds')):
+                results.extend(self.move(dx, dy, spawner.block_map))
+            # Else player is blocked! And fucntion returns nothing
+        return results
+        # Fov will be recomputed if you swap or move
+        # If function returns nothing (entity is blocked) then don't consume turn (fov_recompute and game_state change happens together on the player)

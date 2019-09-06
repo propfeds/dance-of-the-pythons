@@ -3,13 +3,13 @@ import tcod.event
 import json
 from map_objects.game_map import GameMap
 from components.inventory import Inventory
-from entity import Entity
-from renderer import RenderOrder, render_all, erase_entities
-from game_states import GameStates
+from renderer import render_all, erase_entities
 from input_handler import handle_event
-from spawner import Spawner, Factions
-from ai import NeutralAggro
+from spawner import Spawner
+from enums import Factions, GameStates, RenderOrder
 
+
+from components.ai import NeutralAggro
 from map_objects.generator import generate_test_area
 
 def main():
@@ -25,14 +25,14 @@ def main():
     fov_radius=data['fov_radius']
     # Init root console
     tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
-    console_root=tcod.console_init_root(terminal_width, terminal_height, 'Python: Yuwanda\'s Awakening', False, tcod.RENDERER_SDL2, 'C', False)
+    console_root=tcod.console_init_root(terminal_width, terminal_height, 'Python Game Lol', False, tcod.RENDERER_SDL2, 'C', False)
     console_display=tcod.console.Console(terminal_width, terminal_height, 'C')
     with open('gfx/colours/palette.json') as colours:
         palette=json.load(colours)
     console_display.bg[:]=palette['terminal_green']
     #interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
-    spawner=Spawner(map_width, map_height, 0, game_map.path_map)
+    spawner=Spawner(map_width, map_height, 0)
             # Testing creatures
     generate_test_area(game_map, spawner)
     player=spawner.entities[0]
@@ -65,33 +65,15 @@ def main():
         exit=action.get('exit')
         # Player's Turn
         results_player=[]
-        # Results: Extend if player turn ends and append if doesn't?
+        # Results: Extend if player turn ends and append if doesn't? Tcod tutorial is confusing.
         if game_state==GameStates.TURN_PLAYER:
             if move:
                 dx, dy=move
-                if dx==0 and dy==0:
-                    results_player.extend({'wait': True})
-                    print('I\'m still waiting')
+                results_movement=player.handle_move(dx, dy, spawner, game_map.path_map, swappable=True)
+                if results_movement:
+                    results_player.extend(results_movement)
+                    fov_recompute=True
                     game_state=GameStates.TURN_ALLY
-                else:
-                    response=spawner.check_collision(player.x+dx, player.y+dy)
-                    target=response.get('collide')
-                    if target:
-                        # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)
-                        if target.faction==Factions.ENEMY or target.ai==NeutralAggro():
-                            print('A')  # reemmber to extend results
-                            game_state=GameStates.TURN_ALLY
-                        else:
-                            if (not target.walkable) and (not player.walkable): # Non sneks (cheesy circumvention) and if player is in mouse form or sth they'll phase into the enemy
-                                results_player.extend(player.swap(target))
-                            else:
-                                player.move(dx, dy, spawner.block_map)
-                            fov_recompute=True
-                            game_state=GameStates.TURN_ALLY
-                    elif (not response.get('blocked')) and (not response.get('outofbounds')):
-                        player.move(dx, dy, spawner.block_map)
-                        fov_recompute=True
-                        game_state=GameStates.TURN_ALLY
 
             elif pickup: # Should implement a pickup list like POWDER
                 for entity in spawner.entities:
@@ -127,14 +109,14 @@ def main():
         if game_state==GameStates.TURN_ENEMY:
             for entity in spawner.entities:
                 if entity.faction==Factions.ENEMY:
-                    results_enemy=entity.ai.take_turn()
+                    results_enemy=entity.ai.take_turn(spawner, game_map.path_map)
             game_state=GameStates.TURN_NEUTRAL
         
         if game_state==GameStates.TURN_NEUTRAL:
             for entity in spawner.entities:
                 if entity.faction==Factions.NEUTRAL:
                     if entity.ai:
-                        resutls_neutral=entity.ai.take_turn()
+                        resutls_neutral=entity.ai.take_turn(spawner, game_map.path_map)
             game_state=GameStates.TURN_PLAYER
 
 
