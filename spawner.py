@@ -17,9 +17,9 @@ class Spawner:
         # Loading data
         with open('data/entities.json') as data:
             self.entity_data=json.load(data)
-        with open('gfx/colours/entities.json', encoding='utf-8') as gfx:
+        with open('gfx/entities.json', encoding='utf-8') as gfx:
             self.entity_gfx=json.load(gfx)
-        with open('gfx/colours/palette.json') as colours:
+        with open('gfx/palette.json') as colours:
             self.palette=json.load(colours)
         
 

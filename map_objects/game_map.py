@@ -19,9 +19,9 @@ class GameMap:
         # Importing tiles data (please only load at level 1)
         with open('data/tiles.json', encoding='utf-8') as data:
             self.tile_data=json.load(data)
-        with open('gfx/colours/tiles.json', encoding='utf-8') as gfx:
+        with open('gfx/tiles.json', encoding='utf-8') as gfx:
             self.tile_gfx=json.load(gfx)
-        with open('gfx/colours/palette.json') as colours:
+        with open('gfx/palette.json') as colours:
             self.palette=json.load(colours)
 
     def recompute_fov(self, x, y, radius, light_walls, algorithm):
