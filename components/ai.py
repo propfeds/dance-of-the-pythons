@@ -40,12 +40,12 @@ class Guard:
     def take_turn(self, spawner, path_map):
         results=[]
         # If target entity is in fov then chase, if not just stand still for now until something comes into range
-        # Brute move: should favour diagonals
+        # Brute move: should move in a rough line
         dist=self.owner.distance(self.target_x, self.target_y)
-        dx=int(ceil(abs(self.target_x-self.owner.x)/dist))
-        dy=int(ceil(abs(self.target_y-self.owner.y)/dist))
+        dx=int(round(self.target_x-self.owner.x)/dist) if dist>0 else 0
+        dy=int(round(self.target_y-self.owner.y)/dist) if dist>0 else 0
         results_movement=self.owner.handle_move(dx, dy, spawner, path_map, swappable=False)
         if results_movement==[]:
-            print('Try A*, if not ten recalc A* and try again')
+            print('Try A*, if not then recalc A* and try again')
         results.extend(results_movement)
         return results
