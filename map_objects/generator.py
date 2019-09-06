@@ -11,6 +11,7 @@ def generate_test_area(game_map, spawner):
     game_map.fill_rect(Rectangle(3, game_map.height-6, 3, game_map.height-6), 'wall_tent_window')
     game_map.fill_rect(Rectangle(5, game_map.height-8, 5, game_map.height-8), 'ground_dirt')
     game_map.fill_rect(Rectangle(4, game_map.height-7, 6, game_map.height-5), 'ground_grass')
+    game_map.fill_rect(Rectangle(0, 0, 3, 3), 'wall_grass')
     y_dest=game_map.cave_x(13, 0, game_map.width-30, 'wall_dirt', 15, 15, 1, 1, 2)
     spawner.spawn_actor(0, 0, 'player', Factions.ALLY, game_map.path_map)
     spawner.spawn_actor(2, 2, 'snek_test', Factions.ALLY, game_map.path_map)
