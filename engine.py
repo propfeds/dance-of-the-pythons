@@ -109,14 +109,14 @@ def main():
         if game_state==GameStates.TURN_ENEMY:
             for entity in spawner.entities:
                 if entity.faction==Factions.ENEMY:
-                    results_enemy=entity.ai.take_turn()
+                    results_enemy=entity.ai.take_turn(spawner, game_map.path_map)
             game_state=GameStates.TURN_NEUTRAL
         
         if game_state==GameStates.TURN_NEUTRAL:
             for entity in spawner.entities:
                 if entity.faction==Factions.NEUTRAL:
                     if entity.ai:
-                        resutls_neutral=entity.ai.take_turn()
+                        resutls_neutral=entity.ai.take_turn(spawner, game_map.path_map)
             game_state=GameStates.TURN_PLAYER
 
 

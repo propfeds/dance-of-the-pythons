@@ -70,7 +70,7 @@ class Entity:
         results.append({'damage_taken': damage_amount-damage_remaining})
         results.extend({'shielded': damage_shielded})
         if death:
-            results.append({'dead': self.owner})
+            results.append({'dead': self})
         return results
 
     def deal_damage(self, target, damage_amount, piercing, lethal):

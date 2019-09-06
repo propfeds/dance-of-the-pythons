@@ -35,34 +35,36 @@ class Spawner:
                     return {'collide': entity}
         return {}
 
-    def spawn_actor(self, x, y, entity_name, faction, path_map):
+    def spawn_actor(self, x, y, name, faction, path_map):
         if self.check_collision(x, y, path_map):
             return {'spawned': False}
         else:
             # If short you can walk through ;)
-            short=self.entity_data['actors'][entity_name]['walkable']
-            char=self.entity_gfx['actors'][entity_name]['char']
-            colour=tuple(self.palette[self.entity_gfx['actors'][entity_name]['colour']])
-            hp_max=self.entity_data['actors'][entity_name]['hp_max']
-            attack=self.entity_data['actors'][entity_name]['attack']
-            shield=self.entity_data['actors'][entity_name]['shield']
-            alert_threshold=self.entity_data['actors'][entity_name]['alert_threshold']
-            inventory_component=Inventory(self.entity_data['actors'][entity_name]['inventory_capacity'])
-            ai_component=get_ai(self.entity_data['actors'][entity_name]['ai'])
+            walkable=self.entity_data['actors'][name]['walkable']
+            char=self.entity_gfx['actors'][name]['char']
+            colour=tuple(self.palette[self.entity_gfx['actors'][name]['colour']])
+            hp_max=self.entity_data['actors'][name]['hp_max']
+            attack=self.entity_data['actors'][name]['attack']
+            shield=self.entity_data['actors'][name]['shield']
             
-            entity=Entity(x, y, entity_name, faction, char, colour, hp_max, attack, shield, alert_threshold, (RenderOrder.ACTOR_SHORT if short else RenderOrder.ACTOR), short, inventory_component, ai_component)
+            inventory_capacity=self.entity_data['actors'][name].get('inventory_capacity')
+            inventory_component=None if (inventory_capacity==None) else Inventory(inventory_capacity)
+
+            ai_component=get_ai(self.entity_data['actors'][name].get('ai'))
+            
+            entity=Entity(x, y, name, faction, char, colour, hp_max, attack, shield, (RenderOrder.ACTOR_SHORT if walkable else RenderOrder.ACTOR), walkable, inventory_component, ai_component)
             self.entities.append(entity)
-            self.block_map[y, x]=(not short)
+            self.block_map[y, x]=(not walkable)
             return {'spawned': True}
 
-    def spawn_furniture(self, x, y, entity_name, path_map):
+    def spawn_furniture(self, x, y, name, path_map):
         if self.check_collision(x, y, path_map):
             return {'spawned': False}
         else:
             self.entities.append('fuckoff')
             return {'spawned': True}
 
-    def spawn_item(self, x, y, entity_name, item_component, path_map):
+    def spawn_item(self, x, y, name, item_component, path_map):
         # Items can spawn beneath actors (don't need to check entity collision)
         if not path_map.walkable[y, x]:
             return {'spawned': False}

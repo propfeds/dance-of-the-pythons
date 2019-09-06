@@ -4,14 +4,15 @@ from math import ceil
 
 # Basic factory
 def get_ai(ai):
-    if ai.name=='none':         return None
-    if ai.name=='guard':        return Guard()
-    #if string=='reptile_body': return ReptileBody()
-    if ai.name=='neutral_aggro':return NeutralAggro()   # snakes bears
-    if ai.name=='neutral':      return Neutral()        # sometimes dogs, turns into aggro when provoked
-    #if string=='neutral_tame': return NeutralTame()    # kripto the bunny
-    
-    return None
+    if ai==None:
+        return None
+
+    name=ai.get('name')
+    if name=='guard':           return Guard()
+    #elif name=='reptile_body': return ReptileBody()
+    elif name=='neutral_aggro': return NeutralAggro()
+    elif name=='neutral':       return Neutral()    # Turns into aggro when provoked
+    #elif name=='neutral_tame': return NeutralTame()
 
 class Neutral:
     def take_turn(self, block_map, path_map):
@@ -25,19 +26,22 @@ class Guard:
     def __init__(self, target_entity=None):
         self.path=[]
         # target equals patrol point, but placeholder for now
-        self.target_x=self.owner.x
-        self.target_y=self.owner.y
+        self.target_x=0
+        self.target_y=0
 
         self.target_entity=target_entity
         if target_entity:
-            self.target_x=target_entity.x
-            self.target_y=target_entity.y
+            self.set_target(target_entity)
+
+    def set_target(self, target_entity):
+        self.target_x=target_entity.x
+        self.target_y=target_entity.y
 
     def take_turn(self, spawner, path_map):
         results=[]
         # If target entity is in fov then chase, if not just stand still for now until something comes into range
         # Brute move: should favour diagonals
-        dist=self.owner.distance(self.owner, self.target_x, self.target_y)
+        dist=self.owner.distance(self.target_x, self.target_y)
         dx=int(ceil(abs(self.target_x-self.owner.x)/dist))
         dy=int(ceil(abs(self.target_y-self.owner.y)/dist))
         results_movement=self.owner.handle_move(dx, dy, spawner, path_map, swappable=False)

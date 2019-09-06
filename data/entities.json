@@ -6,22 +6,15 @@
             "hp_max": 5,
             "attack": 1,
             "shield": 300,
-            "alert_threshold": 15,
             "walkable": false,
-            "inventory_capacity": 26,
-            "ai":
-            {
-                "name": "none"
-            }
+            "inventory_capacity": 26
         },
         "snek_test":
         {
             "hp_max": 10,
             "attack": 0,
             "shield": 0,
-            "alert_threshold": 10,
             "walkable": true,
-            "inventory_capacity": 0,
             "ai":
             {
                 "name": "neutral"
@@ -32,7 +25,6 @@
             "hp_max": 10,
             "attack": 1,
             "shield": 0,
-            "alert_threshold": 10,
             "walkable": false,
             "inventory_capacity": 6,
             "ai":
