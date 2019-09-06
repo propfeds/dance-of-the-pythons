@@ -23,6 +23,12 @@
         "colour_lit": "green",
         "colour_dim": "dark_green"
     },
+    "wall_grass":
+    {
+        "char": "w",
+        "colour_lit": "green",
+        "colour_dim": "dark_green"
+    },
     "wall_tent":
     {
         "char": "#",

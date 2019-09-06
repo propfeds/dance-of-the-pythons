@@ -23,6 +23,12 @@
         "transparent": false,
         "destructible": true
     },
+    "wall_grass":
+    {
+        "walkable": true,
+        "transparent": false,
+        "destructible": true
+    },
     "wall_tent":
     {
         "walkable": false,

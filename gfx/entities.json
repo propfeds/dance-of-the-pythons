@@ -21,7 +21,6 @@
     {
         "smoke_explosion":
         {
-            "char": "░",
             "colour": "grey",
             "alpha_max": 128
         }
