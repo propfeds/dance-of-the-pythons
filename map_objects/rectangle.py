@@ -4,6 +4,8 @@ class Rectangle:
         self.x2=x2
         self.y1=y1
         self.y2=y2
+        self.w=x2-x1+1
+        self.h=y2-y1+1
 
     def centre(self):
         return (int((self.x1+self.x2)/2), int((self.y1+self.y2)/2))
