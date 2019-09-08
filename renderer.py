@@ -1,5 +1,5 @@
 import tcod
-from enums import RenderOrder
+from data.enums import RenderOrder
 
 def render_all(console_root, console_display, entities, game_map, fov_recompute):
     # [y, x] arrays remember

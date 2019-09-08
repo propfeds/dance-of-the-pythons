@@ -1,7 +1,7 @@
 import json
 import numpy
 from components.ai import get_ai
-from enums import RenderOrder
+from data.enums import RenderOrder
 from entity import Entity
 from components.inventory import Inventory
 

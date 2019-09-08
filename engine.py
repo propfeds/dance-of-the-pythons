@@ -6,7 +6,7 @@ from components.inventory import Inventory
 from renderer import render_all, erase_entities
 from input_handler import handle_event
 from spawner import Spawner
-from enums import Factions, GameStates, RenderOrder
+from data.enums import Factions, GameStates, RenderOrder
 
 
 from map_objects.generator import generate_test_area

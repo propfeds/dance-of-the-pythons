@@ -1,5 +1,5 @@
 from map_objects.rectangle import Rectangle
-from enums import Factions
+from data.enums import Factions
 
 def generate_test_area(game_map, spawner):
     game_map.fill_rect(Rectangle(0, 0, game_map.width, game_map.height), 'ground_grass')
