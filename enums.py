@@ -15,6 +15,7 @@ class GameStates(Enum):
     MENU_TARGET_DIR=21    # Nine directions which if self-target (NumPad5 or s) fires to ground
 
 class Factions(Enum):
+    # Furniture, environment and items are factionless
     NEUTRAL=0
     ALLY=1
     ENEMY=2

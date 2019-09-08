@@ -121,7 +121,10 @@ class Entity:
                     # Cases for neutral tame and aggro
                     print('PETA')
                 elif target.faction!=self.faction:
-                    results.extend(self.bump(target))
+                    if target.name=='vendor':
+                        print('And also storytellers please')
+                    else:
+                        results.extend(self.bump(target))
                 else:
                     # ALLIES: if player is in mouse form or sth they'll phase into the ally else they swap
                     if (not self.walkable) and (not target.walkable) and swappable:
