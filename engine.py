@@ -9,7 +9,6 @@ from spawner import Spawner
 from enums import Factions, GameStates, RenderOrder
 
 
-from components.ai import NeutralAggro
 from map_objects.generator import generate_test_area
 
 def main():

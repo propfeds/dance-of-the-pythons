@@ -116,21 +116,24 @@ class Entity:
             response=spawner.check_collision(self.x+dx, self.y+dy, path_map)
             target=response.get('collide')
             if target:
-                # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)
-                if target.faction==Factions.NEUTRAL:
-                    # Cases for neutral tame and aggro
-                    print('PETA')
-                elif target.faction!=self.faction:
-                    if target.name=='vendor':
-                        print('And also storytellers please')
+                if target.faction: # Non items / environment
+                    # Depends on object: if enemy attack, if ally swap (sneks not gonna brek cuz they pathable)
+                    if target.faction==Factions.NEUTRAL:
+                        # Cases for neutral tame and aggro
+                        print('PETA')
+                    elif target.faction!=self.faction:
+                        if target.name=='vendor':
+                            print('And also storytellers please')
+                        else:
+                            results.extend(self.bump(target))
                     else:
-                        results.extend(self.bump(target))
+                        # ALLIES: if player is in mouse form or sth they'll phase into the ally else they swap
+                        if (not self.walkable) and (not target.walkable) and swappable:
+                            results.extend(self.swap(target))
+                        else:
+                            results.extend(self.move(dx, dy, spawner.block_map))
                 else:
-                    # ALLIES: if player is in mouse form or sth they'll phase into the ally else they swap
-                    if (not self.walkable) and (not target.walkable) and swappable:
-                        results.extend(self.swap(target))
-                    else:
-                        results.extend(self.move(dx, dy, spawner.block_map))
+                    print('Don\'t bump the hella items')
             elif (not response.get('blocked')) and (not response.get('outofbounds')):
                 results.extend(self.move(dx, dy, spawner.block_map))
             # Else player is blocked! And fucntion returns nothing
