@@ -6,10 +6,9 @@ from components.inventory import Inventory
 from renderer import render_all, erase_entities
 from input_handler import handle_event
 from spawner import Spawner
-from enums import Factions, GameStates, RenderOrder
+from data.enums import Factions, GameStates, RenderOrder
 
 
-from components.ai import NeutralAggro
 from map_objects.generator import generate_test_area
 
 def main():
@@ -24,13 +23,13 @@ def main():
     fov_light_walls=data['fov_light_walls']
     fov_radius=data['fov_radius']
     # Init root console
-    tcod.console_set_custom_font('gfx/fonts/terminal16x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
+    tcod.console_set_custom_font('gfx/fonts/terminal12x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
     console_root=tcod.console_init_root(terminal_width, terminal_height, 'Python Game Lol', False, tcod.RENDERER_SDL2, 'C', False)
     console_display=tcod.console.Console(terminal_width, terminal_height, 'C')
-    with open('gfx/colours/palette.json') as colours:
+    with open('gfx/palette.json') as colours:
         palette=json.load(colours)
     console_display.bg[:]=palette['terminal_green']
-    #interface=tcod.console.Console(terminal_width, map_height, 'C')
+    #console_interface=tcod.console.Console(terminal_width, map_height, 'C')
     game_map=GameMap(map_width, map_height)
     spawner=Spawner(map_width, map_height, 0)
             # Testing creatures

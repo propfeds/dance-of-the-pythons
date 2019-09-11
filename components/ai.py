@@ -9,10 +9,15 @@ def get_ai(ai):
 
     name=ai.get('name')
     if name=='guard':           return Guard()
+    elif name=='vendor':        return Vendor()
     #elif name=='reptile_body': return ReptileBody()
     elif name=='neutral_aggro': return NeutralAggro()
     elif name=='neutral':       return Neutral()    # Turns into aggro when provoked
     #elif name=='neutral_tame': return NeutralTame()
+
+class Vendor:
+    def take_turn(self, block_map, path_map):
+        print('snek oil')
 
 class Neutral:
     def take_turn(self, block_map, path_map):
