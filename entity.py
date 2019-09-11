@@ -6,7 +6,7 @@ from data.enums import Factions, RenderOrder
 #pylint: disable=no-member
 
 class Entity:
-    def __init__(self, x, y, name, faction, char, colour, hp_max, attack, shield, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, ai=None, item=None, environment=None):
+    def __init__(self, x, y, name, faction, char, colour, hp_max, attack, shield, render_order=RenderOrder.CORPSE, walkable=True, inventory=None, ai=None, item=None):
         self.x=x
         self.y=y
         self.name=name
@@ -32,9 +32,6 @@ class Entity:
         self.item=item
         if self.item:
             self.item.owner=self
-        self.environment=environment
-        if self.environment:
-            self.environment.owner=self
 
     def take_damage(self, damage_amount, piercing, lethal):
         damage_remaining=damage_amount

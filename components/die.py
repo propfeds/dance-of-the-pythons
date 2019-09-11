@@ -1,7 +1,7 @@
 from random import randint
 
 class Die:
-    def __init__(self, dice, sides, mod):
+    def __init__(self, dice, sides, mod=0):
         self.dice=dice
         self.sides=sides
         self.mod=mod
