@@ -1,20 +1,5 @@
 {
-    "ground_dirt":
-    {
-        "graphics":
-        {
-            "char": ".",
-            "colour_lit": "brown",
-            "colour_dim": "dark_brown"
-        },
-        "properties":
-        {
-            "walkable": true,
-            "transparent": true,
-            "destructible": true
-        }
-    },
-    "wall_dirt":
+    "dirt":
     {
         "graphics":
         {
@@ -25,26 +10,10 @@
         "properties":
         {
             "walkable": false,
-            "transparent": false,
-            "destructible": true
+            "transparent": false
         }
     },
-    "ground_grass":
-    {
-        "graphics":
-        {
-            "char": ".",
-            "colour_lit": "green",
-            "colour_dim": "dark_green"
-        },
-        "properties":
-        {
-            "walkable": true,
-            "transparent": true,
-            "destructible": true
-        }
-    },
-    "wall_tree":
+    "tree":
     {
         "graphics":
         {
@@ -55,11 +24,10 @@
         "properties":
         {
             "walkable": false,
-            "transparent": false,
-            "destructible": true
+            "transparent": false
         }
     },
-    "wall_grass":
+    "grass":
     {
         "graphics":
         {
@@ -70,11 +38,10 @@
         "properties":
         {
             "walkable": true,
-            "transparent": false,
-            "destructible": true
+            "transparent": false
         }
     },
-    "wall_tent":
+    "tent":
     {
         "graphics":
         {
@@ -85,11 +52,10 @@
         "properties":
         {
             "walkable": false,
-            "transparent": false,
-            "destructible": true
+            "transparent": false
         }
     },
-    "wall_tent_window":
+    "tent_window":
     {
         "graphics":
         {
@@ -100,8 +66,7 @@
         "properties":
         {
             "walkable": false,
-            "transparent": true,
-            "destructible": true
+            "transparent": true
         }
     }
 }

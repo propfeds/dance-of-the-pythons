@@ -1,9 +1,15 @@
 {
     "terminal_width": 64,
     "terminal_height": 36,
-    "map_width": 64,
-    "map_height": 28,
+    "consoles":
+    [
+        {
+            "x": 0,
+            "y": 0,
+            "width": 64,
+            "height": 28
+        }
+    ],
     "fov_algorithm": 12,
-    "fov_light_walls": true,
-    "fov_radius": 9
+    "fov_light_walls": true
 }
