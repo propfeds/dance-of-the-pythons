@@ -1,7 +1,5 @@
 class Movement:
-    def __init__(self, x, y, walkable, swappable=False, speed=100, hover=False):
-       self.x=x
-       self.y=y
+    def __init__(self, walkable, swappable=False, speed=100, hover=False):
        self.walkable=walkable
        self.swappable=swappable
        self.speed=speed
