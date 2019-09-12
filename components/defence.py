@@ -1,7 +1,7 @@
 class Defence:
-    def __init__(self, max_health, ac=0, to_hit=0):
-        self.max_health=max_health
-        self.health=max_health
+    def __init__(self, health_max, ac=0, to_hit=0):
+        self.health_max=health_max
+        self.health=health_max
         self.ac=ac
         # To hit is a bonus
         self.to_hit=to_hit

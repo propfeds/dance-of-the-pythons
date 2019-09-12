@@ -1,10 +1,10 @@
 {
-    "player_ritualist":
+    "player_ritualist_test":
     {
         "identity":
         {
-            "name": "Ritualist",
-            "given_name": "Snailface"
+            "display_name": "Ritualist",
+            "given_name": "Snailface (Test)"
         },
         "graphics":
         {
@@ -22,14 +22,13 @@
             {
                 "die":
                 {
-                    "dice": 1,
                     "sides": 2
                 }
             }
         },
         "defence":
         {
-            "max_health": 15
+            "health_max": 15
         },
         "inventory":
         {
@@ -43,25 +42,82 @@
     },
     "snek_test":
     {
-        "hp_max": 10,
-        "attack": 0,
-        "shield": 0,
-        "walkable": true,
+        "identity":
+        {
+            "name": "Snek Test"
+        },
+        "graphics":
+        {
+            "char": "s",
+            "colour": "green",
+            "render_order": "actor_short"
+        },
+        "movement":
+        {
+            "walkable": true
+        },
+        "offence":
+        {
+            "damage":
+            {
+                "die":
+                {
+                    "sides": 3
+                }
+            }
+        },
+        "defence":
+        {
+            "health_max": 4,
+            "ac": 1
+        },
+        "vision":
+        {
+            "fov_radius": 9,
+            "fov_radius_dark": 9
+        },
         "ai":
         {
-            "name": "neutral"
+            
         }
     },
     "focker_test":
     {
-        "hp_max": 10,
-        "attack": 1,
-        "shield": 0,
-        "walkable": false,
-        "inventory_capacity": 6,
-        "ai":
+        "identity":
         {
-            "name": "guard"
+            "display_name": "Focker",
+            "given_name": "Dongerone (Test)"
+        },
+        "graphics":
+        {
+            "char": "m",
+            "colour": "skin_tan",                "render_order": "actor"
+        },
+        "movement":
+        {
+            "walkable": false,
+            "swappable": true
+        },
+        "offence":
+        {
+            "damage":
+            {
+                "die":
+                {
+                    "sides": 4
+                }
+            }
+        },
+        "defence":
+        {
+            "health_max": 10
+        },
+        "inventory":
+        {
+            "capacity": 6
+        },
+        "vision":
+        {
         }
     }
 }

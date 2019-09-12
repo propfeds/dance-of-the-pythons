@@ -1,36 +1,17 @@
 {
-    "actors":
+    "player":
     {
-        "player":
-        {
-            "char": "@",
-            "colour": "skin_brown"
-        },
-        "snek_test":
-        {
-            "char": "s",
-            "colour": "green"
-        },
-        "focker_test":
-        {
-            "char": "m",
-            "colour": "skin_tan"
-        }
+        "char": "@",
+        "colour": "skin_brown"
     },
-    "environment":
+    "snek_test":
     {
-        "smoke_explosion":
-        {
-            "colour": "grey",
-            "alpha_max": 128
-        }
+        "char": "s",
+        "colour": "green"
     },
-    "furniture":
+    "focker_test":
     {
-
-    },
-    "items":
-    {
-        
+        "char": "m",
+        "colour": "skin_tan"
     }
 }
