@@ -1,44 +1,107 @@
 {
     "ground_dirt":
     {
-        "walkable": true,
-        "transparent": true,
-        "destructible": true
+        "graphics":
+        {
+            "char": ".",
+            "colour_lit": "brown",
+            "colour_dim": "dark_brown"
+        },
+        "properties":
+        {
+            "walkable": true,
+            "transparent": true,
+            "destructible": true
+        }
     },
     "wall_dirt":
     {
-        "walkable": false,
-        "transparent": false,
-        "destructible": true
+        "graphics":
+        {
+            "char": "░",
+            "colour_lit": "brown",
+            "colour_dim": "dark_brown"
+        },
+        "properties":
+        {
+            "walkable": false,
+            "transparent": false,
+            "destructible": true
+        }
     },
     "ground_grass":
     {
-        "walkable": true,
-        "transparent": true,
-        "destructible": true
+        "graphics":
+        {
+            "char": ".",
+            "colour_lit": "green",
+            "colour_dim": "dark_green"
+        },
+        "properties":
+        {
+            "walkable": true,
+            "transparent": true,
+            "destructible": true
+        }
     },
     "wall_tree":
     {
-        "walkable": false,
-        "transparent": false,
-        "destructible": true
+        "graphics":
+        {
+            "char": "♣",
+            "colour_lit": "green",
+            "colour_dim": "dark_green"
+        },
+        "properties":
+        {
+            "walkable": false,
+            "transparent": false,
+            "destructible": true
+        }
     },
     "wall_grass":
     {
-        "walkable": true,
-        "transparent": false,
-        "destructible": true
+        "graphics":
+        {
+            "char": "w",
+            "colour_lit": "green",
+            "colour_dim": "dark_green"
+        },
+        "properties":
+        {
+            "walkable": true,
+            "transparent": false,
+            "destructible": true
+        }
     },
     "wall_tent":
     {
-        "walkable": false,
-        "transparent": false,
-        "destructible": true
+        "graphics":
+        {
+            "char": "#",
+            "colour_lit": "olive",
+            "colour_dim": "dark_green"
+        },
+        "properties":
+        {
+            "walkable": false,
+            "transparent": false,
+            "destructible": true
+        }
     },
     "wall_tent_window":
     {
-        "walkable": false,
-        "transparent": true,
-        "destructible": true
+        "graphics":
+        {
+            "char": "=",
+            "colour_lit": "olive",
+            "colour_dim": "dark_green"
+        },
+        "properties":
+        {
+            "walkable": false,
+            "transparent": true,
+            "destructible": true
+        }
     }
 }
