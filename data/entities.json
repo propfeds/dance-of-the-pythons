@@ -1,52 +1,67 @@
 {
-    "actors":
+    "player_ritualist":
     {
-        "player":
+        "identity":
         {
-            "hp_max": 5,
-            "attack": 1,
-            "shield": 300,
-            "walkable": false,
-            "inventory_capacity": 26
+            "name": "Ritualist",
+            "given_name": "Snailface"
         },
-        "snek_test":
+        "graphics":
         {
-            "hp_max": 10,
-            "attack": 0,
-            "shield": 0,
-            "walkable": true,
-            "ai":
+            "char": "@",
+            "colour": "skin_brown",                "render_order": "actor"
+        },
+        "movement":
+        {
+            "walkable": false,
+            "swappable": true
+        },
+        "offence":
+        {
+            "damage":
             {
-                "name": "neutral"
+                "die":
+                {
+                    "dice": 1,
+                    "sides": 2
+                }
             }
         },
-        "focker_test":
+        "defence":
         {
-            "hp_max": 10,
-            "attack": 1,
-            "shield": 0,
-            "walkable": false,
-            "inventory_capacity": 6,
-            "ai":
-            {
-                "name": "guard"
-            }
+            "max_health": 15
+        },
+        "inventory":
+        {
+            "capacity": 26
+        },
+        "vision":
+        {
+            "fov_radius": 9,
+            "fov_radius_dark": 5
         }
     },
-    "environment":
+    "snek_test":
     {
-        "smoke_explosion":
+        "hp_max": 10,
+        "attack": 0,
+        "shield": 0,
+        "walkable": true,
+        "ai":
         {
-            "decay_min": 2,
-            "decay_max": 5
+            "name": "neutral"
         }
     },
-    "furniture":
+    "focker_test":
     {
-
-    },
-    "items":
-    {
-
+        "hp_max": 10,
+        "attack": 1,
+        "shield": 0,
+        "walkable": false,
+        "inventory_capacity": 6,
+        "ai":
+        {
+            "name": "guard"
+        }
     }
 }
