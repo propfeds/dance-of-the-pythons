@@ -1,18 +1,15 @@
 from enum import Enum
 
 class GameStates(Enum):
-    TURN_PLAYER=0   # Team Good
-    TURN_ALLY=1     # Team Good (your kin and charmed animals)
-    TURN_ENEMY=2    # Team Bad (humans)
-    TURN_NEUTRAL=3  # Team Neutral (traps, critters)
-    DEATH=4         # Welcome to the Hollows
+    DEATH=-1
+    GAME=0
+    MENU_MAIN=1
+    MENU_PAUSE=2             # Supposed to be options in the middle of the game
+    MENU_INVENTORY=3        # Press inventory then press key to pull up the item menu with options such as [drop, wield, use]
+    MENU_EQUIP=4        # You know where you wear that shiny plate mail
 
-    MENU_PAUSE=10             # Supposed to be options in the middle of the game
-    MENU_INVENTORY=11        # Press inventory then press key to pull up the item menu with options such as [drop, wield, use]
-    MENU_EQUIP=12        # You know where you wear that shiny plate mail
-
-    MENU_TARGET_POINT=20  # The cursed thing, but now with keyboard controls instead
-    MENU_TARGET_DIR=21    # Nine directions which if self-target (NumPad5 or s) fires to ground
+    MENU_TARGET_POINT=10  # The cursed thing, but now with keyboard controls instead
+    MENU_TARGET_DIR=11    # Nine directions which if self-target (NumPad5 or s) fires to ground
 
 class Factions(Enum):
     # Furniture, environment and items are factionless
@@ -21,9 +18,8 @@ class Factions(Enum):
     ENEMY=2
 
 class RenderOrder(Enum):
-    CORPSE=-1
+    ENVIRONMENT=-1  # Entity'd terrain, spook trees, etc.
     FURNITURE=0
-    ITEM=1
-    ACTOR_SHORT=2   # Mice
-    ENVIRONMENT=3   # explosion smoke, particles
-    ACTOR=4
+    ITEM=1          # Including corpses
+    ACTOR_SHORT=2
+    ACTOR=3
