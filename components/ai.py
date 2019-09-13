@@ -17,15 +17,15 @@ def get_ai(ai):
 
 class Vendor:
     def take_turn(self, block_map, path_map):
-        pass
+        print('snek oil')
 
 class Neutral:
     def take_turn(self, block_map, path_map):
-        pass
+        print('s')
 
 class NeutralAggro:
     def take_turn(self, block_map, path_map):
-        pass
+        print('r')
 
 class Guard:
     def __init__(self, target_entity=None):

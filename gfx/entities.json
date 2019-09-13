@@ -1,0 +1,36 @@
+{
+    "actors":
+    {
+        "player":
+        {
+            "char": "@",
+            "colour": "skin_brown"
+        },
+        "snek_test":
+        {
+            "char": "s",
+            "colour": "green"
+        },
+        "focker_test":
+        {
+            "char": "m",
+            "colour": "skin_tan"
+        }
+    },
+    "environment":
+    {
+        "smoke_explosion":
+        {
+            "colour": "grey",
+            "alpha_max": 128
+        }
+    },
+    "furniture":
+    {
+
+    },
+    "items":
+    {
+        
+    }
+}

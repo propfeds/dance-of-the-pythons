@@ -4,7 +4,7 @@ import json
 from map_objects.game_map import GameMap
 from components.inventory import Inventory
 from renderer import render_all, erase_entities
-from input import handle_event
+from input_handler import handle_event
 from spawner import Spawner
 from data.enums import Factions, GameStates, RenderOrder
 
