@@ -18,8 +18,10 @@ class Factions(Enum):
     ENEMY=2
 
 class RenderOrder(Enum):
-    ENVIRONMENT=-1  # Entity'd terrain, spook trees, etc.
-    FURNITURE=0
-    ITEM=1          # Including corpses
-    ACTOR_SHORT=2
-    ACTOR=3
+    # Ground terrain is zero
+    ENVIRONMENT=1  # Entity'd terrain, spook trees, etc.
+    FURNITURE=2
+    ITEM=3          # Including corpses
+    ACTOR_SHORT=4
+    ACTOR=5
+    PARTICLE=6

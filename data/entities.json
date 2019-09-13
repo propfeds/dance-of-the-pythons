@@ -1,40 +1,41 @@
 {
     "player_ritualist_test":
     {
-        "identity":
+        "Identity":
         {
             "display_name": "Ritualist",
             "given_name": "Snailface (Test)"
         },
-        "graphics":
+        "Graphics":
         {
             "char": "@",
-            "colour": "skin_brown",                "render_order": "actor"
+            "colour": "skin_brown",
+            "render_order": "ACTOR"
         },
-        "movement":
+        "Movement":
         {
             "walkable": false,
             "swappable": true
         },
-        "offence":
+        "Offence":
         {
             "damage":
             {
-                "die":
+                "Die":
                 {
                     "sides": 2
                 }
             }
         },
-        "defence":
+        "Defence":
         {
             "health_max": 15
         },
-        "inventory":
+        "Inventory":
         {
             "capacity": 26
         },
-        "vision":
+        "Vision":
         {
             "fov_radius": 9,
             "fov_radius_dark": 5
@@ -42,81 +43,82 @@
     },
     "snek_test":
     {
-        "identity":
+        "Identity":
         {
             "name": "Snek Test"
         },
-        "graphics":
+        "Graphics":
         {
             "char": "s",
             "colour": "green",
-            "render_order": "actor_short"
+            "render_order": "ACTOR_SHORT"
         },
-        "movement":
+        "Movement":
         {
             "walkable": true
         },
-        "offence":
+        "Offence":
         {
             "damage":
             {
-                "die":
+                "Die":
                 {
                     "sides": 3
                 }
             }
         },
-        "defence":
+        "Defence":
         {
             "health_max": 4,
             "ac": 1
         },
-        "vision":
+        "Vision":
         {
             "fov_radius": 9,
             "fov_radius_dark": 9
         },
-        "ai":
+        "AI":
         {
             
         }
     },
     "focker_test":
     {
-        "identity":
+        "Identity":
         {
             "display_name": "Focker",
             "given_name": "Dongerone (Test)"
         },
-        "graphics":
+        "Graphics":
         {
             "char": "m",
-            "colour": "skin_tan",                "render_order": "actor"
+            "colour": "skin_tan",
+            "render_order": "ACTOR"
         },
-        "movement":
+        "Movement":
         {
             "walkable": false,
             "swappable": true
         },
-        "offence":
+        "Offence":
         {
             "damage":
             {
-                "die":
+                "Die":
                 {
                     "sides": 4
                 }
             }
         },
-        "defence":
+        "Defence":
         {
             "health_max": 10
         },
-        "inventory":
+        "Inventory":
         {
             "capacity": 6
         },
-        "vision":
+        "Vision":
         {
         }
     }
