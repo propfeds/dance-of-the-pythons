@@ -1,4 +1,4 @@
-from map_objects.rectangle import Rectangle
+from systems.geometry import Rectangle
 from data.enums import Factions
 
 def generate_test_area(game_map, spawner):

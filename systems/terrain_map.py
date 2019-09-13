@@ -3,8 +3,8 @@ import tcod.map
 import numpy
 import json
 from random import randint
-from map_objects.tile import Tile
-from map_objects.rectangle import Rectangle
+from systems.map.tile import Tile
+from systems.geometry import Rectangle
 
 class TerrainMap:
     def __init__(self, width, height, level):
