@@ -7,9 +7,10 @@ from map_objects.tile import Tile
 from map_objects.rectangle import Rectangle
 
 class TerrainMap:
-    def __init__(self, width, height):
+    def __init__(self, width, height, level):
         self.width=width
         self.height=height
+        self.level=level
         self.path_map=tcod.map.Map(width, height, 'C')
         self.grounds=numpy.full((height, width), None)
         self.walls=numpy.full((height, width), None)
