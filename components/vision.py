@@ -3,3 +3,4 @@ class Vision:
         self.block=block
         self.fov_radius=fov_radius
         self.fov_radius_dark=fov_radius_dark
+        self.fov_recompute=True
