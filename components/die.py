@@ -20,3 +20,6 @@ class Die:
     
     def get_average(self):
         return ((float(self.get_min())+float(self.get_max()))/2.0)
+
+    def __str__(self):
+        return f'{self.dice}d{self.sides}+{self.mod}'
