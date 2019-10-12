@@ -1,7 +1,7 @@
 import tcod
 import tcod.map
 import numpy
-import json
+from json import load
 from random import randint
 from systems.map.tile import Tile
 from systems.geometry import Rectangle
@@ -16,9 +16,9 @@ class TerrainMap:
         self.walls=numpy.full((height, width), None)
         self.explored=numpy.full((height, width), False)
         # Importing tiles data (please only load at level 1)
-        self.palette=json.load(open('gfx/palette.json'))
-        self.ground_data=json.load(open('data/grounds.json', encoding='utf-8'))
-        self.wall_data=json.load(open('gfx/tiles.json', encoding='utf-8'))
+        self.palette=load(open('gfx/palette.json'))
+        self.ground_data=load(open('data/grounds.json', encoding='utf-8'))
+        self.wall_data=load(open('gfx/tiles.json', encoding='utf-8'))
         
     def fill_rect(self, rect, is_wall, tile_name):
         # is_wall: if the tiles filled are gonna be walls

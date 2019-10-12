@@ -1,6 +1,6 @@
 import tcod
-import json
 import systems
+from json import load
 
 class World:
     def __init__(self):

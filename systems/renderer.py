@@ -1,13 +1,13 @@
 import tcod
-import json
+from json import load
 from data.enums import RenderOrder
 from components.position import Position
 from components.graphics import Graphics
 
 class Renderer:
     def __init__(self):
-        self.config=json.load(open('data/config.json'))
-        self.palette=json.load(open('data/palette.json'))
+        self.config=load(open('data/config.json'))
+        self.palette=load(open('data/palette.json'))
         tcod.console_set_custom_font('data/fonts/terminal12x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
         self.console_root=tcod.console_init_root(self.config['terminal_width'], self.config['terminal_height'], 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
         # array to blit by order
