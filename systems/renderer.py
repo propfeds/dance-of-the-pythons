@@ -1,20 +1,21 @@
 import tcod
 from json import load
 from data.enums import RenderOrder
-from components.position import Position
-from components.graphics import Graphics
+from components import Graphics, Position
 
 class Renderer:
     def __init__(self):
-        self.config=load(open('data/config.json'))
-        self.palette=load(open('data/palette.json'))
+        with open('data/config.json') as json_config:
+            self.config=load(json_config)
+        with open('data/palette.json') as json_palette:
+            self.palette=load(json_palette)
         tcod.console_set_custom_font('data/fonts/terminal12x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
         self.console_root=tcod.console_init_root(self.config['terminal_width'], self.config['terminal_height'], 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
         # array to blit by order
         self.map_consoles=[]
         # Grounds, walls, entities and particles consoles (index 0~6)
         for i in range(7):
-            self.map_consoles.append(tcod.console.Console(self.config['consoles']['map']['width'][i], self.config['consoles']['map']['height'][i], 'C'))
+            self.map_consoles.append(tcod.console.Console(self.config['consoles']['map']['width'], self.config['consoles']['map']['height'], 'C'))
         
     def render_routine(self, terrain_map, fov):
         self.render_terrain(terrain_map, fov)
@@ -42,7 +43,7 @@ class Renderer:
 
     def blit_entities(self):
         for i, console in enumerate(self.map_consoles):
-            console.blit(self.console_root, self.config['consoles']['map']['x'][i], self.config['consoles']['map']['y'][i], 0, 0, self.config['consoles']['map']['width'][i], self.config['consoles']['map']['height'][i])
+            console.blit(self.console_root, self.config['consoles']['map']['x'], self.config['consoles']['map']['y'], 0, 0, self.config['consoles']['map']['width'], self.config['consoles']['map']['height'])
 
     def erase_entities(self, spawner, fov):
         # gather fov (array) from bitwise orring entities with both Vision and Companion components

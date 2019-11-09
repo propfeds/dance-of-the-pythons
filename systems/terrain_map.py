@@ -16,9 +16,12 @@ class TerrainMap:
         self.walls=numpy.full((height, width), None)
         self.explored=numpy.full((height, width), False)
         # Importing tiles data (please only load at level 1)
-        self.palette=load(open('gfx/palette.json'))
-        self.ground_data=load(open('data/grounds.json', encoding='utf-8'))
-        self.wall_data=load(open('gfx/tiles.json', encoding='utf-8'))
+        with open('gfx/palette.json') as json_palette:
+            self.palette=load(json_palette)
+        with open('data/grounds.json', encoding='utf-8') as json_ground:
+            self.ground_data=load(json_ground)
+        with open('gfx/tiles.json', encoding='utf-8') as json_walls:
+            self.wall_data=load(json_walls)
         
     def fill_rect(self, rect, is_wall, tile_name):
         # is_wall: if the tiles filled are gonna be walls
