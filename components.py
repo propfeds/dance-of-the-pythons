@@ -1,9 +1,7 @@
+from data.constants import def_move_cost, def_fov_radius, def_fov_radius_dark
 from data.enums import RenderOrder
 from json import load
 from random import randint
-
-with open('data/constants.json', 'r') as json_constants:
-    constants=load(json_constants)
 
 class Defence:
     def __init__(self, health_max, ac=0, to_hit=0):
@@ -75,7 +73,8 @@ class Inventory:
         self.contents=[]
 
 class Movement:
-    def __init__(self, walkable, swappable=False, cost=constants['default_movement_cost'], hover=False):
+    def __init__(self, walkable, swappable=False, cost=def_move_cost,
+    hover=False):
        self.walkable=walkable
        self.swappable=swappable
        self.cost=cost
@@ -109,7 +108,8 @@ class Position:
         target_entity.components[Position].y=y_temp
 
 class Vision:
-    def __init__(self, block=False, fov_radius=constants['default_fov_radius'], fov_radius_dark=constants['default_fov_radius_dark']):
+    def __init__(self, block=False, fov_radius=def_fov_radius,
+    fov_radius_dark=def_fov_radius_dark):
         self.block=block
         self.fov_radius=fov_radius
         self.fov_radius_dark=fov_radius_dark

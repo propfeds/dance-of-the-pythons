@@ -7,15 +7,15 @@ class Renderer:
     def __init__(self):
         with open('data/config.json') as json_config:
             self.config=load(json_config)
-        with open('data/palette.json') as json_palette:
+        with open('data/palettes/{0}.json'.format(self.config['palette'])) as json_palette:
             self.palette=load(json_palette)
         tcod.console_set_custom_font('data/fonts/terminal12x16_gs_ro.png', tcod.FONT_TYPE_GREYSCALE | tcod.tcod.FONT_LAYOUT_CP437)
         self.console_root=tcod.console_init_root(self.config['terminal_width'], self.config['terminal_height'], 'Dance of the Pythons', False, tcod.RENDERER_SDL2, 'C', False)
         # array to blit by order
         self.map_consoles=[]
         # Grounds, walls, entities and particles consoles (index 0~6)
-        for i in range(7):
-            self.map_consoles.append(tcod.console.Console(self.config['consoles']['map']['width'], self.config['consoles']['map']['height'], 'C'))
+        for _ in range(7):
+            self.map_consoles.append(tcod.console.Console(self.config['consoles']['map']['w'], self.config['consoles']['map']['h'], 'C'))
         
     def render_routine(self, terrain_map, fov):
         self.render_terrain(terrain_map, fov)
@@ -42,8 +42,11 @@ class Renderer:
                     self.map_consoles[RenderOrder[entity.components[Graphics].render_order].value].tiles[['ch', 'fg']][y, x]=ord(entity.components[Graphics].char), (*entity.components[Graphics].colour, 255)
 
     def blit_entities(self):
-        for i, console in enumerate(self.map_consoles):
-            console.blit(self.console_root, self.config['consoles']['map']['x'], self.config['consoles']['map']['y'], 0, 0, self.config['consoles']['map']['width'], self.config['consoles']['map']['height'])
+        for _, console in enumerate(self.map_consoles):
+            console.blit(self.console_root, self.config['consoles']['map']['x'],
+                self.config['consoles']['map']['y'], 0, 0,
+                self.config['consoles']['map']['w'],
+                self.config['consoles']['map']['h'])
 
     def erase_entities(self, spawner, fov):
         # gather fov (array) from bitwise orring entities with both Vision and Companion components
