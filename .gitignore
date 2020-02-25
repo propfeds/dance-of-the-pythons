@@ -1,6 +1,7 @@
 # Project
-unused/
-ref/
+**/unused/
+**/ref/
+rewrite_*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
