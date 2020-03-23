@@ -1,12 +1,11 @@
 # Not actually enums
 
-# Regular neutral is aggressive neutral
+# Nature is aggressive neutral, tame neutral has no faction
 factions={
     'local': 0,
     'local_scum': 1,
     'human': 2,
-    'neutral': 3,
-    'neutral_tame': 4,
+    'nature': 3,
 }
 
 # Particles can be smoke (actually conceals entity char), spell effects etc.

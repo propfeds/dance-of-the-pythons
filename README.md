@@ -1,5 +1,5 @@
 # Dance of the Pythons
-A snake-themed roguelike made in Python 3 (with Libtcod & Esper ECS),
+A snake-themed roguelike made in Python 3, libtcod, snecs,
 and no code as of February 2020.
 
 ### Can I play this right now?

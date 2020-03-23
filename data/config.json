@@ -18,5 +18,7 @@
             "h": [9,  9,  9 ]
         }
     },
-    "palette": "db32"
+    "palette": "db32",
+    "font": "8x8_eclipse",
+    "keys": "default"
 }
