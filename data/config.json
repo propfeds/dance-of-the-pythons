@@ -1,24 +1,5 @@
 {
-    "terminal_width": 64,
-    "terminal_height": 36,
-    "consoles":
-    {
-        "map":
-        {
-            "x": 0,
-            "y": 0,
-            "w": 64,
-            "h": 27
-        },
-        "ui":
-        {
-            "x": [0,  0,  16],
-            "y": [27, 27, 27],
-            "w": [64, 16, 48],
-            "h": [9,  9,  9 ]
-        }
-    },
     "palette": "db32",
     "font": "8x8_eclipse",
-    "keys": "default"
+    "keys": "numpad"
 }
