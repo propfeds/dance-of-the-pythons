@@ -2,6 +2,7 @@
 **/unused/
 **/ref/
 rewrite_*/
+docs/suggestions/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
