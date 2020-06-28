@@ -20,11 +20,11 @@ class Inventory(RegisteredComponent):
         self.capacity=capacity
         self.contents=[]
 
-# Display name is monster type: Snake, Soldier, Giant Dragonfly, etc.
+# Species name is monster type: Snake, Soldier, Giant Dragonfly, etc.
 # Given name is for locals or human plot characters
 class Name(RegisteredComponent):
-    def __init__(self, display: str, given: str=None):
-        self.display=display
+    def __init__(self, species: str, given: str=None):
+        self.species=species
         if given is not None:
             self.given=given
 
