@@ -9,6 +9,7 @@ class Health(RegisteredComponent):
         self.capacity=capacity
         self.current=capacity
         self.regen_interval=regen_interval
+        self.regen_cd=regen_interval
 
 class InputControlled(RegisteredComponent):
     def __init__(self):
@@ -45,6 +46,7 @@ class Stamina(RegisteredComponent):
         self.sides=sides
         self.regen_interval=regen_interval
         self.reservoir=[]
+        self.regen_cd=regen_interval
 
 class Velocity(RegisteredComponent):
     def __init__(self, x: int, y: int):

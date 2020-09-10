@@ -11,8 +11,5 @@ Other ingredients include:
 
 No. It's not working.
 
-Do not [click](https://discord.gg/AxMZJyg) on that.
-
-## Why are you always bitching in #general-roguelikes?
-
-Yes. It's working.
+There is no Discord, only harmony in acceptance of the incomplete state of the
+game.
